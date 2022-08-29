@@ -5,3 +5,8 @@
 # Logs
 *.log
 .hugo_build.lock
+
+.*.swp
+.*.swo
+*.pyc
+.DS_Store
