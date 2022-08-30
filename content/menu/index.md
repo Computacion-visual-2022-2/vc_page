@@ -2,16 +2,9 @@
 headless: true
 ---
 
-- **Shortcodes**
-- [illusions]({{< relref "/docs/shortcodes/illusions" >}})
-- [rendering]({{< relref "/docs/shortcodes/rendering" >}})
-
-- [p5]({{< relref "/docs/shortcodes/p5" >}})
-- [Buttons]({{< relref "/docs/shortcodes/buttons" >}})
-- [Columns]({{< relref "/docs/shortcodes/columns" >}})
-- [Expand]({{< relref "/docs/shortcodes/expand" >}})
-- [Hints]({{< relref "/docs/shortcodes/hints" >}})
-- [Katex]({{< relref "/docs/shortcodes/katex" >}})
-- [Mermaid]({{< relref "/docs/shortcodes/mermaid" >}})
-- [Tabs]({{< relref "/docs/shortcodes/tabs" >}})
+- [**Contenido**]({{< relref "/docs/contenido" >}})
+- [Illusions]({{< relref "/docs/contenido/illusions" >}})
+    - [Coloring]({{< relref "/docs/contenido/illusions/coloring" >}})
+    - [Mach_Band]({{< relref "/docs/contenido/illusions/mach_band" >}}) 
+- [Rendering]({{< relref "/docs/contenido/rendering" >}})
 <br />
