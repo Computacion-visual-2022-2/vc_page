@@ -40,4 +40,3 @@ function setup() {
     noLoop();
   }
   
-  //function draw() {}

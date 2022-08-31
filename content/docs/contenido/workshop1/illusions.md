@@ -70,4 +70,4 @@ function setup() {
 {{< /highlight >}}
 {{< /details >}}
 
-{{<p5-iframe sketch="/vc_page/sketches/primroseField.js" width="725" height="550">}}
+{{<p5-iframe sketch="/vc_page/sketches/primroseField.js" width="410" height="410">}}
