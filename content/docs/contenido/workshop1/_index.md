@@ -2,9 +2,9 @@
 bookCollapseSection: true
 ---
 
-# Illusions
+# Workshop 1
 
-Illusions 
+Workshop 1 
 
 # Taller 1
 
