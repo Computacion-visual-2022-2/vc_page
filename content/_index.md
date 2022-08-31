@@ -1,5 +1,15 @@
+# Computación Visual 2022-2
 
-# Showcase Template
+Template from [template](https://github.com/VisualComputing/showcase)
 
-Welcome to the [gohugo](https://gohugo.io/) template to create rich content [academic reports](https://www.wordy.com/writers-workshop/writing-an-academic-report/) having [p5.js](https://p5js.org/) sketches.
+This is the website [Visual Computing](https://computacion-visual-2022-2.github.io/vc_page/).
 
+Team:
+- Pedro Rodrigo Grisales Medina [pgrisales](https://github.com/pgrisales)
+- Adrián Arturo Canacuan Ipial
+- Juan David Taquez
+- Marcela Nathaly Guzmán Caicedo 
+
+Facultad de Ingeniería\
+Universidad Nacional de Colombia\
+2022-2
