@@ -1,11 +1,22 @@
 # Illusions
 
 # Primrose Field
+
 ## Problem Statement
 
+Study, implement and discuss possible applications of some known visual phenomena and optical illusions.
 
 ## Background
 
+The "Primrose's Field" optical illusion was created and
+designed by Akiyoshi Kitaoka, who was a professor of
+psychology in Ristumeikan University.
+In the optical illusion you will see a checkered
+background consisting of an alternation of light green
+and dark green squares. In the corners of the squares,
+there are primroses in the colors of magenta and white.
+However, there is a 1 square outer perimeter with only
+two primroses on them.
 
 ## Code
 
