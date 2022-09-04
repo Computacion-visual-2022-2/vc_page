@@ -193,8 +193,7 @@ function keyPressed() {
 let img;
 
 function preload() {
-  img = loadImage('/vc_page/sketches/lenna.png');
-  //img = loadImage('sketches/mahakala.jpg');
+  img = loadImage('/vc_page/sketches/mandrill.png');
 }
 
 function setup() {
