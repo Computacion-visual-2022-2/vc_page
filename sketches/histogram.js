@@ -2,7 +2,6 @@ let img;
 
 function preload() {
   img = loadImage('/vc_page/sketches/mandrill.png');
-  //img = loadImage('sketches/mahakala.jpg');
 }
 
 function setup() {
