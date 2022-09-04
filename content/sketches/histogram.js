@@ -1,7 +1,7 @@
 let img;
 
 function preload() {
-  img = loadImage('/vc_page/sketches/lenna.png');
+  img = loadImage('/vc_page/sketches/mandrill.png');
   //img = loadImage('sketches/mahakala.jpg');
 }
 

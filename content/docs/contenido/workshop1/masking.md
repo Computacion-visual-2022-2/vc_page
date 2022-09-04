@@ -9,60 +9,92 @@ Implement an image processing web app supporting different image kernels and sup
 
 ## Background
 
+### Kernel
+Convolution, Kernel or Mask is an image processing technique in which an odd-sized matrix is used to achieve effects such as sharpening, blurring or enhancement. These masks are achieved by convolution between a kernel and an image, changing the intensity of a pixel to reflect the intensities of the surrounding piexels.
+
+Convolution is also useful to sharpen or enhance some qualities of images, which are very useful when dealing with scientific images.
+
+The following kernels are the ones we use in the code.
+
+__1. Identity:__ This mask returns the same image.
+
+{{< katex >}}
+\begin{bmatrix}
+0 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 0
+\end{bmatrix}
+{{< /katex >}}
+
+__2. Sharpen:__ The sharpen kernel emphasizes the differences in adjacent pixel values which makes the image appear more vivid.
+
+{{< katex >}}
+\begin{bmatrix}
+0 & -1 & 0\\
+-1 & 5 & -1\\
+0 & -1 & 0
+\end{bmatrix}
+{{< /katex >}}
+
+__3. Edge Detection:__ The mask to find the points of drastic change of brightness in an image.
+
+{{< katex >}}
+\begin{bmatrix}
+-1 & -1 & -1\\
+-1 & 8 & -1\\
+-1 & -1 & -1
+\end{bmatrix}
+{{< /katex >}}
+
+__4. Box blur:__ A Box Blur is a linear filter in which each pixel results from the average value of its neighbors.  
+
+{{< katex >}}
+\frac{1}{9}
+\begin{bmatrix}
+1 & 1 & 1\\
+1 & 1 & 1\\
+1 & 1 & 1
+\end{bmatrix}
+{{< /katex >}}
+
+
+### Histogram
 A histogram is a graphical representation that displays how frequently various color values occur in an image. The histogram focuses only on the proportion of the colors and not the location of the colors in the Images. They show the statistical distribution of colors and the essential tones present in the image.
 
 
+### Lightness
 Saturation is the intensity of a hue from gray tone (no saturation) to pure, vivid color (high saturation). Brightness is the relative lightness or darkness of a particular color, from black (no brightness) to white (full brightness). Brightness is also called Lightness in some contexts, in particular in SQL queries.
+The definition used in photometry and colorimetry describes the non-linear perception we have of the amount of light received, which is often defined from the luminance of the source studied. 
 
 ## Code
 
 ### Kernels
 
+| Shortcut | Description |
+| -------- | ----------- |
+| 0 | Identity |
+| 1 | Sharpen|
+| 2 | Edge Detection |
+| 3 | Box Blur|
+
 {{< details title="Code Kernel" open=false >}}
 {{< highlight html >}}
 let img;
 
-/*
 //Identidad
-let kernel = [
+var kernel = [
    [0, 0, 0],
    [0, 1, 0],
    [0, 0, 0]
 ];
-*/
 
-/*
-//Sharpen - Enfocar
-let kernel = [
-   [0, -1, 0],
-   [-1, 5, -1],
-   [0, -1, 0]
-];
-*/
-
-//Detección de bordes
-let kernel = [
-   [-1, -1, -1],
-   [-1, 8, -1],
-   [-1, -1, -1]
-];
-
-
-/*
-//Desenfoque
-let kernel = [
-   [1/9, 1/9, 1/9],
-   [1/9, 1/9, 1/9],
-   [1/9, 1/9, 1/9]
-];
-*/
 function preload() {
-   img = loadImage('/vc_page/sketches/lenna.png');
+   img = loadImage('/vc_page/sketches/mandrill.png');
 }
 
- function setup() {
-    createCanvas(400, 400);
-    img.loadPixels();
+function setup() {
+   createCanvas(400, 400);
+   img.loadPixels();
 }
 
  function draw() {
@@ -82,8 +114,6 @@ function preload() {
    
    newImg.updatePixels();
    image(newImg, 0, 0,width,height);
-   
-   noLoop();
 }
 
 function convolution(x, y, matrix) {
@@ -123,11 +153,39 @@ function convolution(x, y, matrix) {
   return color(rtotal, gtotal, btotal);
 }
 
+function keyPressed() {
+
+	if (key === '0') { //Identidad
+      kernel = [
+         [0, 0, 0],
+         [0, 1, 0],
+         [0, 0, 0]
+      ];
+    } else if (key === '1') { //Sharpen - Enfocar
+      kernel = [
+         [0, -1, 0],
+         [-1, 5, -1],
+         [0, -1, 0]
+      ];
+    } else if (key === '2') { //Detección de bordes
+      kernel = [
+         [-1, -1, -1],
+         [-1, 8, -1],
+         [-1, -1, -1]
+      ];  
+    }  else if (key === '3') { //Desenfoque
+      kernel = [
+         [1/9, 1/9, 1/9],
+         [1/9, 1/9, 1/9],
+         [1/9, 1/9, 1/9]
+      ];
+    }
+}
 //Ref: https://p5js.org/examples/image-convolution.html
 {{< /highlight >}}
 {{< /details >}}
 
-{{<p5-iframe sketch="/vc_page/sketches/kernels.js" width="725" height="425">}}
+{{<p5-iframe sketch="/vc_page/sketches/kernels.js" width="425" height="425">}}
   
 ### Histograma
 {{< details title="Code Histogram" open=false >}}
@@ -189,3 +247,11 @@ function draw() {
 
 
 ## Conclusions
+
+
+### References
+* https://setosa.io/ev/image-kernels/
+* https://en.wikipedia.org/wiki/Kernel_(image_processing)
+* https://photographylife.com/understanding-histograms-in-photography
+* https://manifold.net/doc/mfd8/colors_as_hue_saturation_and_brightness.htm
+* http://www.workwithcolor.com/color-properties-definitions-0101.htm

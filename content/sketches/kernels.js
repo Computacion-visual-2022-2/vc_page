@@ -1,46 +1,19 @@
 let img;
 
-/*
 //Identidad
-let kernel = [
+var kernel = [
    [0, 0, 0],
    [0, 1, 0],
    [0, 0, 0]
 ];
-*/
 
-/*
-//Sharpen - Enfocar
-let kernel = [
-   [0, -1, 0],
-   [-1, 5, -1],
-   [0, -1, 0]
-];
-*/
-
-//Detección de bordes
-let kernel = [
-   [-1, -1, -1],
-   [-1, 8, -1],
-   [-1, -1, -1]
-];
-
-
-/*
-//Desenfoque
-let kernel = [
-   [1/9, 1/9, 1/9],
-   [1/9, 1/9, 1/9],
-   [1/9, 1/9, 1/9]
-];
-*/
 function preload() {
-   img = loadImage('/vc_page/sketches/lenna.png');
+   img = loadImage('/vc_page/sketches/mandrill.png');
 }
 
- function setup() {
-    createCanvas(400, 400);
-    img.loadPixels();
+function setup() {
+   createCanvas(400, 400);
+   img.loadPixels();
 }
 
  function draw() {
@@ -60,8 +33,6 @@ function preload() {
    
    newImg.updatePixels();
    image(newImg, 0, 0,width,height);
-   
-   noLoop();
 }
 
 function convolution(x, y, matrix) {
@@ -101,4 +72,31 @@ function convolution(x, y, matrix) {
   return color(rtotal, gtotal, btotal);
 }
 
-//Ref: https://p5js.org/examples/image-convolution.html
+function keyPressed() {
+
+	if (key === '0') { //Identidad
+      kernel = [
+         [0, 0, 0],
+         [0, 1, 0],
+         [0, 0, 0]
+      ];
+    } else if (key === '1') { //Sharpen - Enfocar
+      kernel = [
+         [0, -1, 0],
+         [-1, 5, -1],
+         [0, -1, 0]
+      ];
+    } else if (key === '2') { //Detección de bordes
+      kernel = [
+         [-1, -1, -1],
+         [-1, 8, -1],
+         [-1, -1, -1]
+      ];  
+    }  else if (key === '3') { //Desenfoque
+      kernel = [
+         [1/9, 1/9, 1/9],
+         [1/9, 1/9, 1/9],
+         [1/9, 1/9, 1/9]
+      ];
+    }
+}
