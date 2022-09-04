@@ -12,6 +12,7 @@ The "Primrose's Field" optical illusion was created and designed by Akiyoshi Kit
 Kitaoka's best known illusion and one of the most popular illusions of the genre is "Rotsnake" which is based on the Fraser-Wilcox illusion and has been widely used (not always with permission) in publishing and advertising.
 
 Below we can see the Rotsnake illusion.
+
 ![Rotsnake](https://www.epsilones.com/material/ilusionesopticas/012-rotsnake.jpg)
 
 In the Primrose's Field illusion you will see a checkered background consisting of an alternation of light green and dark green squares. In the corners of the squares, there are primroses in the colors of magenta and white.
