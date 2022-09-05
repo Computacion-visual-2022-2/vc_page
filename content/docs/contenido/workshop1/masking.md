@@ -381,7 +381,13 @@ function draw() {
 
 ## Conclusions
 
-
+Through this module, we can understand how computers process images through RGB and HSL
+	
+Earlier in the history of computing, we used masking and kernels to process images in lower resolutions.
+	
+Modern image processing tools, such as photoshop, use the techniques described in this video to apply effects to an image through playing with the RGB and HSL values and applying them to the selecte dimage.
+	
+	
 ### References
 * https://setosa.io/ev/image-kernels/
 * https://en.wikipedia.org/wiki/Kernel_(image_processing)
