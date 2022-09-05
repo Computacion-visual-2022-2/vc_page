@@ -81,6 +81,11 @@ function setup() {
 
 ## Conclusions
 
+   Through visual illusions, we can hypothesize how our brains percieve light and visual stimuli. 
+    
+   
+    
+    
 #### References
 * http://www.ritsumei.ac.jp/~akitaoka/index-e.html
 * https://www.timesnownews.com/viral/explained-primroses-field-optical-illusion-a-checkered-background-that-appears-to-wave-article-93000350
