@@ -82,7 +82,8 @@ function setup() {
 ## Conclusions
 
    Through visual illusions, we can hypothesize how our brains percieve light and visual stimuli. 
-    
+   
+    Our brains try to process high and low contrast keys and tones, but with different timings to process high and low contrasts tones, we can get the illusion that there is movement
    
     
     
