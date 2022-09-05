@@ -20,7 +20,7 @@ function draw() {
       let r, g, b;
       r = img.pixels[loc];
       // Calcular una cantidad a cambiar de brillo basado en la proximidad al ratón
-      let maxdist = 70;
+      let maxdist = 80;
       let d = dist(x, y, mouseX, mouseY);
       let adjustbrightness = (255 * (maxdist - d)) / maxdist;
       r += adjustbrightness;
