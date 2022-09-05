@@ -6,7 +6,7 @@ This is the website [Visual Computing](https://computacion-visual-2022-2.github.
 
 Team:
 - Pedro Rodrigo Grisales Medina [pgrisales](https://github.com/pgrisales)
-- Adrián Arturo Canacuan Ipial
+- Adrián Arturo Canacuan Ipial [aacanacuani](https://github.com/Adrian-ACI)
 - Juan David Taquez
 - Marcela Nathaly Guzmán Caicedo 
 

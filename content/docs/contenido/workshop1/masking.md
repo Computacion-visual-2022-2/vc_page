@@ -244,6 +244,103 @@ function draw() {
 
 {{<p5-iframe sketch="/vc_page/sketches/histogram.js" width="725" height="550">}}
 
+### Lightness
+{{< details title="Code Lightness" open=false >}}
+{{< highlight html >}}
+let img;
+
+function preload() {
+  img = loadImage('/vc_page/sketches/mandrill.png');
+}
+
+function setup() {
+  createCanvas(725, 550);
+  pixelDensity(1);
+  img.loadPixels();
+  loadPixels();
+}
+
+function draw() {
+  for (let x = 0; x < img.width; x++) {
+    for (let y = 0; y < img.height; y++) {
+      // Calcular la posición 1D de una matriz 2D
+      let loc = (x + y * img.width) * 4;
+      // Obtener los valores R,G,B de una imagen
+      let r, g, b;
+      r = img.pixels[loc];
+      // Calcular una cantidad a cambiar de brillo basado en la proximidad al ratón
+      let maxdist = 100;
+      let d = dist(x, y, mouseX, mouseY);
+      let adjustbrightness = (255 * (maxdist - d)) / maxdist;
+      r += adjustbrightness;
+      // Limitar RGB para asegurarse de estar dentro del rango 0-255 de color
+      r = constrain(r, 0, 255);
+      // Hacer un nuevo color y definir el pixel en la ventana
+      //color c = color(r, g, b);
+      let pixloc = (y * width + x) * 4;
+      pixels[pixloc] = r;
+      pixels[pixloc + 1] = r;
+      pixels[pixloc + 2] = r;
+      pixels[pixloc + 3] = 255;
+    }
+  }
+  updatePixels();
+}
+let img;
+
+function preload() {
+  img = loadImage('/vc_page/sketches/mandrill.png');
+}
+
+function setup() {
+  createCanvas(img.width, img.height);
+}
+
+function draw() {
+  background(220);
+  image(img, 0, 0, img.width, img.height);
+
+  var hist = [];
+    for (let i = 0; i < 256; i++) {
+      hist[i] = 0;
+    }
+    img.loadPixels();
+    // Calculate the histogram
+    for (let i = 0; i < img.width; i++) {
+      for (let j = 0; j < img.height; j++) {
+        let index = (i + j * img.width) * 4;
+        let r = img.pixels[index];
+        let g = img.pixels[index + 1];
+        let b = img.pixels[index + 2];
+        //println(c,col);
+        let bright = floor((r + g + b) / 3);
+        hist[bright]++;
+        //break;
+      }
+    }
+
+    // Find the largest value in the histogram
+    var histMax = max(hist);
+
+    stroke(255);
+    // Draw half of the histogram (skip every second value)
+    for (let i = 0; i < img.width; i += 2) {
+      // Map i (from 0..img.width) to a location in the histogram (0..255)
+      let which = int(map(i, 0, img.width, 0, 255));
+      // Convert the histogram value to a location between
+      // the bottom and the top of the picture
+      let y = int(map(hist[which], 0, histMax, img.height, 0));
+      line(i, img.height, i, y);
+    }
+}
+
+//Ref: https://processing.org/examples/histogram.html
+
+{{< /highlight >}}
+{{< /details >}}
+
+{{<p5-iframe sketch="/vc_page/sketches/lightness.js" width="725" height="550">}}
+
 
 ## Conclusions
 
