@@ -5,9 +5,15 @@ let angle = 0;
 
 let sun, space;
 let spaceSphereSize;
+let inconsolata;
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight - 4);
+}
+
+function preload(){
+  space = loadImage("/vc_page/sketches/w2/space.jpg");
+  inconsolata = loadFont('/vc_page/sketches/w2/Inconsolata.ttf');
 }
 
 function setup() {
@@ -16,37 +22,33 @@ function setup() {
   createCanvas(windowWidth, windowHeight - 4, WEBGL);
   createEasyCam();
   
-  space = loadImage("sketches/space.jpg");
+  sun = new Body(30, 0, null, loadImage("/vc_page/sketches/w2/sun.jpg"), "Sun", color(255));
+  m = new Body(5, 60, sun, loadImage("/vc_page/sketches/w2/mercury.jpg"), "Mercury");
+  v = new Body(8, 120, sun, loadImage("/vc_page/sketches/w2/venus.jpg"), "Venus");
+  e = new Body(9, 190, sun, loadImage("/vc_page/sketches/w2/earth.jpg"), "Earth");
+  new Body(2, 25, e, loadImage("/vc_page/sketches/w2/moon.jpg"), "Moon");
+  r = new Body(7, 260, sun, loadImage("/vc_page/sketches/w2/mars.jpg"), "Mars");
+  new Body(3, 22, r, loadImage("/vc_page/sketches/w2/phobos.jpg"), "Phobos");
+  new Body(2, 30, r, loadImage("/vc_page/sketches/w2/deimos.jpg"), "Deimos");
+  j = new Body(20, 350, sun, loadImage("/vc_page/sketches/w2/jupiter.jpg"), "Jupiter");
+  s = new Body(17, 400, sun, loadImage("/vc_page/sketches/w2/saturn.jpg"), "Saturn");
   
-sun = new Body(30, 0, null, loadImage("sketches/sun.jpg"), color(255));
-  m = new Body(5, 60, sun, loadImage("sketches/mercury.jpg"));
-  v = new Body(8, 120, sun, loadImage("sketches/venus.jpg"));
-  e = new Body(9, 190, sun, loadImage("sketches/earth.jpg"));
-  new Body(2, 25, e, loadImage("sketches/moon.jpg"));
-  r = new Body(7, 260, sun, loadImage("sketches/mars.jpg"));
-  new Body(3, 22, r, loadImage("sketches/phobos.jpg"));
-  new Body(2, 30, r, loadImage("sketches/deimos.jpg"));
-  j = new Body(20, 350, sun, loadImage("sketches/jupiter.jpg"));
-  s = new Body(17, 400, sun, loadImage("sketches/saturn.jpg"));
-  
-  new Body(0, 20, s, loadImage("sketches/phobos.jpg"));
-  new Body(0, 21, s, loadImage("sketches/phobos.jpg"));
-  new Body(0, 22, s, loadImage("sketches/phobos.jpg"));
-  new Body(0, 23, s, loadImage("sketches/phobos.jpg"));
-  new Body(0, 24, s, loadImage("sketches/phobos.jpg"));
-  new Body(0, 25, s, loadImage("sketches/phobos.jpg"));
-  
-  u = new Body(13, 450, sun, loadImage("sketches/uranus.jpg"));
-  n = new Body(12, 500, sun, loadImage("sketches/neptune.jpg"));
-  p = new Body(4, 600, sun, loadImage("sketches/pluto.jpg"));  
+  u = new Body(13, 450, sun, loadImage("/vc_page/sketches/w2/uranus.jpg"), "Uranus");
+  n = new Body(12, 500, sun, loadImage("/vc_page/sketches/w2/neptune.jpg"), "Neptune");
+  p = new Body(4, 600, sun, loadImage("/vc_page/sketches/w2/pluto.jpg"), "Pluto");  
+
+
+  textFont(inconsolata);
+  textSize(9);
+  textAlign(CENTER, CENTER);
 }
 
 function draw() {
   background(0);
   
   noStroke();
-  ambientMaterial(255);
-  //ambientLight(100);
+  //ambientMaterial(255);
+  ambientLight(100);
   
   spaceSphereSize = width > height ? width : height;
   
@@ -84,12 +86,13 @@ function mouseWheel(event) {
 //****************************************
 // BODY
 
-function Body(radius, distance, parent, tex, emission) {
+function Body(radius, distance, parent, tex, name, emission) {
   this.radius = radius;
   this.distance = distance;
   this.orbitLength = distance * 2 * PI;
   this.angle = random(2 * PI);
   this.tex = tex;
+  this.name = name;
   this.emission = emission;
   this.children = [];
   this.parent = parent;
@@ -101,18 +104,12 @@ function Body(radius, distance, parent, tex, emission) {
 Body.prototype.update = function() {
   if (this.orbitLength > 0) {
     let speed = pow((width - this.distance) * 0.01 / (width), 0.5);
-    this.angle += (speed / this.orbitLength) * (this.orbitLength/2/2);
+    this.angle += (speed / this.orbitLength) * (this.orbitLength/2/2/2);
   }
   for (let body of this.children) {
     body.update();
   }
 }
-function mouseClicked(){
-      //sphere(24);
-      return true
-    }
-    mouseClicked()
-    
 
 Body.prototype.draw = function() {
   push();
@@ -148,9 +145,10 @@ Body.prototype.draw = function() {
     }
     
     texture(this.tex);
-  
+
     sphere(this.radius);
-    
+    text(this.name, 0, this.radius + 5);
+
     for (let body of this.children) {
       body.draw();
     }
@@ -158,5 +156,5 @@ Body.prototype.draw = function() {
   pop();
 }
 
-// Ref textures: http://planetpixelemporium.com/pluto.html 
+// Ref textures: http://planetpixelemporium.com/planets.html 
 // Ref Space: https://svs.gsfc.nasa.gov/3895 
