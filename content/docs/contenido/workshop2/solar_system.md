@@ -7,9 +7,66 @@ Implement a 3d webgl application. The p5.treegl or any other libraries may be us
 
 ## Background
 
-### Solar System
+## Solar System
 
-The Solar System is the gravitationally bound system of the Sun and the objects that orbit it. 
+The solar system is a planetary system located in the Milky Way galaxy, and its center is a star we call the Sun. Around its mass, nine planets, 60 satellites and countless asteroids and comets revolve. Of those planets seven have satellites.
+
+The Sun drags the joint rotation of all the stars of the system in its direction, because it concentrates 99% of the joint mass. The orbits that describe the planets around the Sun are ellipse-shaped, and can be defined from their 'eccentricity' and 'inclination'.
+
+The first indicates how far the orbits of the planets are from the center around which they revolve, that is, the Sun. And the second shows the angle of inclination at which each planet rotates with respect to the Earth's orbit.
+
+![Rotsnake](https://concepto.de/wp-content/uploads/2018/02/Sistema-solar-e1518703607625.jpg)
+
+The closest star to the Sun, Mercury, and the farthest, Pluto, are those with the most 'inclined' orbit.
+The closest planets to the Sun: Mercury, Venus, Earth, Mars; and the furthest: Jupiter, Saturn, Uranus and Neptune.
+
+The former have a density greater than 3 grams per cubic centimeter, making them rocky, while the latter have primarily gaseous masses, with less than two grams per cubic centimeter.
+
+
+## WEBGL
+
+In p5.js, there are two render modes: P2D (default renderer) and WEBGL. Both render modes utilize the html canvas element, however by enabling the WEBGL "context" on the canvas, we can now draw in both 2D and 3D. To enable WEBGL, simply specify as the third parameter in the createCanvas() function.
+
+<pre><code>function setup() {
+  createCanvas(200, 200, WEBGL);
+}
+</code></pre>
+
+## 3D coordinate system
+
+The Cartesian coordinate 0,0 (x,y) is located in the upper left corner of the drawing canvas. In WEBGL mode a third dimension is introduced: Z.
+
+The z dimension is the axis pointing towards you from the screen. is the "left-handed" rule. Point your left index finger to the right and your middle finger down, and your thumb will automatically point towards you. The direction in which the fingers point is assigned exactly to the axes. The point 0,0,0 (x,y,z) is in the middle of the canvas.
+
+![Rotsnake](https://upload.wikimedia.org/wikipedia/commons/2/2c/3D_coordinate_system.svg)
+
+<pre><code>function setup() {
+  createCanvas(windowWidth, windowHeight, WEBGL);
+}
+</code></pre>
+
+## Translate, Rotate
+
+## 3D Primitives Shapes
+
+There are 7 different 3D geometry primitives in p5.js.
+
+<pre><code>box()
+plane()
+sphere()
+ellipsoid()
+cone()
+cylinder()
+torus() 
+</code></pre>
+
+## textures
+
+## webgl text()
+
+## Lights and Materials
+
+
 
 ## Code
 
@@ -187,3 +244,4 @@ Body.prototype.draw = function() {
 ### References
 * http://planetpixelemporium.com/planets.html
 * https://svs.gsfc.nasa.gov/3895 
+* https://github.com/processing/p5.js/wiki/Getting-started-with-WebGL-in-p5
