@@ -331,6 +331,10 @@ Body.prototype.draw = function() {
 
 ## Conclusions
 
+ * The use of several libraries for the simulation of complex 3D systems, and also the functions of P5 that work with WEBGL provide us with very good tools for interactive and educational purposes. 
+  
+ * There are several ways to recreate real lighting depending on the view.
+  
 ### References
 * http://planetpixelemporium.com/planets.html
 * https://svs.gsfc.nasa.gov/3895 
