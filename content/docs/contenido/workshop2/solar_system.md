@@ -15,7 +15,7 @@ The Sun drags the joint rotation of all the stars of the system in its direction
 
 The first indicates how far the orbits of the planets are from the center around which they revolve, that is, the Sun. And the second shows the angle of inclination at which each planet rotates with respect to the Earth's orbit.
 
-![Rotsnake](https://concepto.de/wp-content/uploads/2018/02/Sistema-solar-e1518703607625.jpg)
+![Solar](https://concepto.de/wp-content/uploads/2018/02/Sistema-solar-e1518703607625.jpg)
 
 The closest star to the Sun, Mercury, and the farthest, Pluto, are those with the most 'inclined' orbit.
 The closest planets to the Sun: Mercury, Venus, Earth, Mars; and the furthest: Jupiter, Saturn, Uranus and Neptune.
@@ -38,14 +38,12 @@ The Cartesian coordinate 0,0 (x,y) is located in the upper left corner of the dr
 
 The z dimension is the axis pointing towards you from the screen. is the "left-handed" rule. Point your left index finger to the right and your middle finger down, and your thumb will automatically point towards you. The direction in which the fingers point is assigned exactly to the axes. The point 0,0,0 (x,y,z) is in the middle of the canvas.
 
-![Rotsnake](https://upload.wikimedia.org/wikipedia/commons/2/2c/3D_coordinate_system.svg)
+![Dimension](https://upload.wikimedia.org/wikipedia/commons/2/2c/3D_coordinate_system.svg)
 
 <pre><code>function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
 }
 </code></pre>
-
-## Translate, Rotate
 
 ## 3D Primitives Shapes
 
@@ -60,12 +58,104 @@ cylinder()
 torus() 
 </code></pre>
 
-## textures
+![Light](https://content.instructables.com/ORIG/FCV/THNI/IRPPNQ1X/FCVTHNIIRPPNQ1X.png?auto=webp&fit=bounds&frame=1&width=1024)
+
+## Translate, Rotate
+Calling translate(x,y,z) applies a transformation to the Model Matrix. This is a technical way to move the origin coordinate of the drawing. for example the following code:
+
+<pre><code>function draw(){
+  background(255);
+  sphere();
+  translate(100,100,-100);
+  sphere();
+}
+</code></pre>
+This code draws a sphere, then translates our model matrix 100 units to the right, 100 units down, and 100 units away from the viewer, and finally draws another sphere at the new translated origin. 
+
+Another type of model matrix transformation in 3D is rotate(). There are 4 different rotation functions in WEBGL mode:
+
+<pre><code>rotate(angle, [x,y,z]);
+rotateX(angle);
+rotateY(angle);
+rotateZ(angle);
+</code></pre>
+
+![rotate](https://help.autodesk.com/cloudhelp/2015/ENU/3DSMax/images/GUID-825CCA0B-7DFA-428F-9117-CC5B6BA62FF0.png)
+
+
+
+## Textures
+
+p5.js supports video, image, and offscreen 2d renderers as textures in WEBGL mode. A texture is like a “skin” that wraps around a 3D geometry. For example, if you want a static image to “texture” a sphere, you would write something like this:
+
+<pre><code>let img;
+function preload(){
+  img = loadImage(“path/to/img.jpg”);
+}
+function setup(){
+  createCanvas(500,500,WEBGL);
+}
+function draw(){
+  background(255);
+  texture(img);
+  sphere(45);
+}
+</code></pre>
+
+![Texture](https://img.freepik.com/free-vector/earth-planet-transparent-with-earth-texture-map_1308-60076.jpg?w=2000)
 
 ## webgl text()
 
-## Lights and Materials
+The webgl version of the text() method works very similarly to the 2d version. However there are a few differences:
 
+### Disadvantages:
+
+* You can only use use opentype/truetype fonts loaded in your preload() function using the loadFont() method. You must either place those font files in a location accessible from your sketch, or use a CORS-compatible webl URL.
+* stroke() is not currently supported.
+
+### Advantages:
+
+* The fidelity of the rendered text should be better, especially when zooming & tilting.
+* The performance may be better, especially if the text changes regularly and you are unable to cache the offscreen image used in the previous method.
+
+<pre><code>let myFont;
+function preload() {
+  myFont = loadFont('assets/AvenirNextLTPro-Demi.otf');
+}
+
+function setup() {
+  fill('#ED225D');
+  textFont(myFont);
+  textSize(36);
+  text('p5*js', 10, 50);
+}
+</code></pre>
+
+## Lights
+
+In WEBGL mode is lights. Lighting is a simple but powerful way to provide depth and realism to p5.js sketches. Are 3 types of light functions in p5.js:
+
+<pre><code>ambientLight();
+directionalLight();
+pointLight();
+</code></pre>
+
+<pre><code>ambientLight(255,0,0); 
+sphere(25);
+</code></pre>
+
+![Light](https://cdn.knowww.eu/59b8e93cd54a862e9d7e4049//OnEsdqowGmpH.png)
+
+ambientLight() is the simplest of the three functions, and it provides even (omnidirectional) ambient lighting to objects drawn afterward. It takes a p5.Color or r,g,b numerical values as parameters.
+
+## Camera and view
+
+### p5.EasyCam
+A p5.js library for easy 3D camera control.
+
+This library is a derivative of the original PeasyCam Library by Jonathan Feinberg and combines new useful features with the great look and feel of the original version.
+
+![camera](https://diwi.github.io/p5.EasyCam/screenshots/RandomBoxes_crop.jpg)
 
 
 ## Code
@@ -245,3 +335,4 @@ Body.prototype.draw = function() {
 * http://planetpixelemporium.com/planets.html
 * https://svs.gsfc.nasa.gov/3895 
 * https://github.com/processing/p5.js/wiki/Getting-started-with-WebGL-in-p5
+* https://diwi.github.io/p5.EasyCam/
