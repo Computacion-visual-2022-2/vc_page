@@ -1,9 +1,9 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content=" Procedural Texturing # Problem statement # Exercise
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Procedural Texturing # Problem statement # Exercise
 Adapt other patterns from the book of shaders and map them as textures onto other 3D shapes.
-Background # Code # Code Procedural Texturing //Code Conclusions # References # "><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content><meta property="og:description" content=" Procedural Texturing # Problem statement # Exercise
+Background # Code # Code Procedural Texturing .js let pg; let truchetShader, brickShader,colorShader; let theShader; let selectShader; let selectShape; let shapeValue = 0; function preload() { // shader adapted from here: https://thebookofshaders.com/09/ truchetShader = readShader('/vc_page/sketches/shaders/procedural/truchet.frag', { matrices: Tree.NONE, varyings: Tree.NONE }); brickShader = readShader('/vc_page/sketches/shaders/procedural/brick.frag', { matrices: Tree."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content><meta property="og:description" content="Procedural Texturing # Problem statement # Exercise
 Adapt other patterns from the book of shaders and map them as textures onto other 3D shapes.
-Background # Code # Code Procedural Texturing //Code Conclusions # References # "><meta property="og:type" content="article"><meta property="og:url" content="https://computacion-visual-2022-2.github.io/vc_page/docs/contenido/shaders/4._procedural_texturing/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-11-24T22:26:24-05:00"><title>4. Procedural Texturing | VC-2022-2</title><link rel=manifest href=/vc_page/manifest.json><link rel=icon href=/vc_page/favicon.png type=image/x-icon><link rel=stylesheet href=/vc_page/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/vc_page/flexsearch.min.js></script>
-<script defer src=/vc_page/en.search.min.236dbdb70ecc6a9334b1d81f2c0e23c80d643f71df948c4959d945101dcd9d3f.js integrity="sha256-I229tw7MapM0sdgfLA4jyA1kP3HflIxJWdlFEB3NnT8=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+Background # Code # Code Procedural Texturing .js let pg; let truchetShader, brickShader,colorShader; let theShader; let selectShader; let selectShape; let shapeValue = 0; function preload() { // shader adapted from here: https://thebookofshaders.com/09/ truchetShader = readShader('/vc_page/sketches/shaders/procedural/truchet.frag', { matrices: Tree.NONE, varyings: Tree.NONE }); brickShader = readShader('/vc_page/sketches/shaders/procedural/brick.frag', { matrices: Tree."><meta property="og:type" content="article"><meta property="og:url" content="https://computacion-visual-2022-2.github.io/vc_page/docs/contenido/shaders/4._procedural_texturing/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-11-27T13:27:56-05:00"><title>4. Procedural Texturing | VC-2022-2</title><link rel=manifest href=/vc_page/manifest.json><link rel=icon href=/vc_page/favicon.png type=image/x-icon><link rel=stylesheet href=/vc_page/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/vc_page/flexsearch.min.js></script>
+<script defer src=/vc_page/en.search.min.680f9517fb992febbb519fd679851d67f1e770dfc5d11e4c9d2da2c16dfdbe9d.js integrity="sha256-aA+VF/uZL+u7UZ/WeYUdZ/HncN/F0R5MnS2iwW39vp0=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/vc_page/><span>VC-2022-2</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/vc_page/docs/contenido/>Contenido</a><ul><li><input type=checkbox id=section-389d651ad498d6de6d23b8270b749d93 class=toggle checked>
 <label for=section-389d651ad498d6de6d23b8270b749d93 class="flex justify-between"><a role=button>Shaders</a></label><ul><li><a href=/vc_page/docs/contenido/shaders/1._coloring/>1. Coloring</a></li><li><a href=/vc_page/docs/contenido/shaders/2._texturing/>2. Texturing</a></li><li><a href=/vc_page/docs/contenido/shaders/3._image_processing/>3. Image Processing</a></li><li><a href=/vc_page/docs/contenido/shaders/4._procedural_texturing/ class=active>4. Procedural Texturing</a></li><li><a href=/vc_page/docs/contenido/shaders/5._lighting/>5. Lighting</a></li></ul></li><li><input type=checkbox id=section-2389dc99fc67873ebfb8ef67f4a3fee8 class=toggle>
 <label for=section-2389dc99fc67873ebfb8ef67f4a3fee8 class="flex justify-between"><a role=button>Workshop1</a></label><ul><li><a href=/vc_page/docs/contenido/workshop1/illusions/>Illusions</a></li><li><a href=/vc_page/docs/contenido/workshop1/masking/>Masking</a></li></ul></li><li><input type=checkbox id=section-815c4fefd753e489e90e326d54a408e9 class=toggle>
@@ -13,7 +13,263 @@ Background # Code # Code Procedural Texturing //Code Conclusions # References # 
 <a class=anchor href=#procedural-texturing>#</a></h1><h2 id=problem-statement>Problem statement
 <a class=anchor href=#problem-statement>#</a></h2><blockquote class="book-hint info"><p><strong>Exercise</strong></p><p>Adapt other patterns from the book of shaders and map them as textures onto other 3D shapes.</p></blockquote><h2 id=background>Background
 <a class=anchor href=#background>#</a></h2><h2 id=code>Code
-<a class=anchor href=#code>#</a></h2><details><summary>Code Procedural Texturing</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>//Code</span></span></code></pre></div></div></details><iframe id=sketch style=width:380px;height:380px srcdoc="
+<a class=anchor href=#code>#</a></h2><details><summary>Code Procedural Texturing .js</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>let pg;
+</span></span><span style=display:flex><span>let truchetShader, brickShader,colorShader;
+</span></span><span style=display:flex><span>let theShader;
+</span></span><span style=display:flex><span>let selectShader;
+</span></span><span style=display:flex><span>let selectShape;
+</span></span><span style=display:flex><span>let shapeValue = 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function preload() {
+</span></span><span style=display:flex><span>  // shader adapted from here: https://thebookofshaders.com/09/
+</span></span><span style=display:flex><span>  truchetShader = readShader(&#39;/vc_page/sketches/shaders/procedural/truchet.frag&#39;,
+</span></span><span style=display:flex><span>                             { matrices: Tree.NONE, varyings: Tree.NONE });
+</span></span><span style=display:flex><span>  brickShader = readShader(&#39;/vc_page/sketches/shaders/procedural/brick.frag&#39;,
+</span></span><span style=display:flex><span>                             { matrices: Tree.NONE, varyings: Tree.NONE });
+</span></span><span style=display:flex><span>  colorShader = readShader(&#39;/vc_page/sketches/shaders/procedural/color.frag&#39;,
+</span></span><span style=display:flex><span>                             { matrices: Tree.NONE, varyings: Tree.NONE });
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function setup() {
+</span></span><span style=display:flex><span>  createCanvas(400, 400, WEBGL);
+</span></span><span style=display:flex><span>  // create frame buffer object to render the procedural texture
+</span></span><span style=display:flex><span>  pg = createGraphics(400, 400, WEBGL);
+</span></span><span style=display:flex><span>  textureMode(NORMAL);
+</span></span><span style=display:flex><span>  noStroke();
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  pg.noStroke();
+</span></span><span style=display:flex><span>  pg.textureMode(NORMAL);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  selectShader = createSelect();
+</span></span><span style=display:flex><span>  selectShader.position(10, 10);
+</span></span><span style=display:flex><span>  selectShader.style(&#39;color&#39;, &#39;black&#39;);
+</span></span><span style=display:flex><span>  selectShader.option(&#39;Truchet&#39;, 0);
+</span></span><span style=display:flex><span>  selectShader.option(&#39;Brick&#39;, 1);
+</span></span><span style=display:flex><span>  selectShader.option(&#39;Color&#39;, 2);
+</span></span><span style=display:flex><span>  selectShader.changed(selectShaderEvent);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  selectShape = createSelect();
+</span></span><span style=display:flex><span>  selectShape.position(300, 10);
+</span></span><span style=display:flex><span>  selectShape.style(&#39;color&#39;, &#39;black&#39;);
+</span></span><span style=display:flex><span>  selectShape.option(&#39;Cylinder&#39;, 0);
+</span></span><span style=display:flex><span>  selectShape.option(&#39;Sphere&#39;, 1);
+</span></span><span style=display:flex><span>  selectShape.option(&#39;Box&#39;, 2);
+</span></span><span style=display:flex><span>  selectShape.changed(selectShapeEvent);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  theShader = truchetShader;
+</span></span><span style=display:flex><span>  // use truchetShader to render onto pg
+</span></span><span style=display:flex><span>  pg.shader(theShader);
+</span></span><span style=display:flex><span>  // emitResolution, see:
+</span></span><span style=display:flex><span>  // https://github.com/VisualComputing/p5.treegl#macros
+</span></span><span style=display:flex><span>  pg.emitResolution(theShader);
+</span></span><span style=display:flex><span>  // https://p5js.org/reference/#/p5.Shader/setUniform
+</span></span><span style=display:flex><span>  theShader.setUniform(&#39;u_zoom&#39;, 3);
+</span></span><span style=display:flex><span>  // pg clip-space quad (i.e., both x and y vertex coordinates ∈ [-1..1])
+</span></span><span style=display:flex><span>  pg.quad(-1, -1, 1, -1, 1, 1, -1, 1);
+</span></span><span style=display:flex><span>  // set pg as texture
+</span></span><span style=display:flex><span>  texture(pg);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function selectShaderEvent(){
+</span></span><span style=display:flex><span>  shaderValue = selectShader.value();
+</span></span><span style=display:flex><span>  if(shaderValue == 0){
+</span></span><span style=display:flex><span>      theShader = truchetShader;
+</span></span><span style=display:flex><span>    }else if(shaderValue == 1){
+</span></span><span style=display:flex><span>      theShader = brickShader;
+</span></span><span style=display:flex><span>      console.log(&#39;brick&#39;);
+</span></span><span style=display:flex><span>    }else if(shaderValue == 2){
+</span></span><span style=display:flex><span>      theShader = colorShader;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  pg.shader(theShader);
+</span></span><span style=display:flex><span>  // emitResolution, see:
+</span></span><span style=display:flex><span>  // https://github.com/VisualComputing/p5.treegl#macros
+</span></span><span style=display:flex><span>  pg.emitResolution(theShader);
+</span></span><span style=display:flex><span>  // https://p5js.org/reference/#/p5.Shader/setUniform
+</span></span><span style=display:flex><span>  theShader.setUniform(&#39;u_zoom&#39;, 3);
+</span></span><span style=display:flex><span>  // pg clip-space quad (i.e., both x and y vertex coordinates ∈ [-1..1])
+</span></span><span style=display:flex><span>  pg.quad(-1, -1, 1, -1, 1, 1, -1, 1);
+</span></span><span style=display:flex><span>  // set pg as texture
+</span></span><span style=display:flex><span>  texture(pg);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function selectShapeEvent(){
+</span></span><span style=display:flex><span>  shapeValue = selectShape.value();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function draw() {
+</span></span><span style=display:flex><span>  background(33);
+</span></span><span style=display:flex><span>  orbitControl();
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  if (shapeValue == 0){
+</span></span><span style=display:flex><span>    cylinder(100, 200);
+</span></span><span style=display:flex><span>  } else if (shapeValue == 1){
+</span></span><span style=display:flex><span>    sphere(120);
+</span></span><span style=display:flex><span>  } else {
+</span></span><span style=display:flex><span>    box(150,150,150);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function mouseMoved() {
+</span></span><span style=display:flex><span>  // https://p5js.org/reference/#/p5.Shader/setUniform
+</span></span><span style=display:flex><span>  theShader.setUniform(&#39;u_zoom&#39;, int(map(mouseX, 0, width, 1, 30)));
+</span></span><span style=display:flex><span>  // pg clip-space quad (i.e., both x and y vertex coordinates ∈ [-1..1])
+</span></span><span style=display:flex><span>  pg.quad(-1, -1, 1, -1, 1, 1, -1, 1);
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><details><summary>Code truchet.frag</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>// Author @patriciogv ( patriciogonzalezvivo.com ) - 2015
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>#ifdef GL_ES
+</span></span><span style=display:flex><span>precision mediump float;
+</span></span><span style=display:flex><span>#endif
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>#define PI 3.14159265358979323846
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>uniform vec2 u_resolution;
+</span></span><span style=display:flex><span>uniform float u_time;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>uniform float u_zoom;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>vec2 rotate2D (vec2 _st, float _angle) {
+</span></span><span style=display:flex><span>    _st -= 0.5;
+</span></span><span style=display:flex><span>    _st =  mat2(cos(_angle),-sin(_angle),
+</span></span><span style=display:flex><span>                sin(_angle),cos(_angle)) * _st;
+</span></span><span style=display:flex><span>    _st += 0.5;
+</span></span><span style=display:flex><span>    return _st;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>vec2 tile (vec2 _st, float _zoom) {
+</span></span><span style=display:flex><span>    _st *= _zoom;
+</span></span><span style=display:flex><span>    return fract(_st);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>vec2 rotateTilePattern(vec2 _st){
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    //  Scale the coordinate system by 2x2
+</span></span><span style=display:flex><span>    _st *= 2.0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    //  Give each cell an index number
+</span></span><span style=display:flex><span>    //  according to its position
+</span></span><span style=display:flex><span>    float index = 0.0;
+</span></span><span style=display:flex><span>    index += step(1., mod(_st.x,2.0));
+</span></span><span style=display:flex><span>    index += step(1., mod(_st.y,2.0))*2.0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    //      |
+</span></span><span style=display:flex><span>    //  2   |   3
+</span></span><span style=display:flex><span>    //      |
+</span></span><span style=display:flex><span>    //--------------
+</span></span><span style=display:flex><span>    //      |
+</span></span><span style=display:flex><span>    //  0   |   1
+</span></span><span style=display:flex><span>    //      |
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    // Make each cell between 0.0 - 1.0
+</span></span><span style=display:flex><span>    _st = fract(_st);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    // Rotate each cell according to the index
+</span></span><span style=display:flex><span>    if(index == 1.0){
+</span></span><span style=display:flex><span>        //  Rotate cell 1 by 90 degrees
+</span></span><span style=display:flex><span>        _st = rotate2D(_st,PI*0.5);
+</span></span><span style=display:flex><span>    } else if(index == 2.0){
+</span></span><span style=display:flex><span>        //  Rotate cell 2 by -90 degrees
+</span></span><span style=display:flex><span>        _st = rotate2D(_st,PI*-0.5);
+</span></span><span style=display:flex><span>    } else if(index == 3.0){
+</span></span><span style=display:flex><span>        //  Rotate cell 3 by 180 degrees
+</span></span><span style=display:flex><span>        _st = rotate2D(_st,PI);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    return _st;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>void main (void) {
+</span></span><span style=display:flex><span>    vec2 st = gl_FragCoord.xy/u_resolution.xy;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    st = tile(st,u_zoom);
+</span></span><span style=display:flex><span>    st = rotateTilePattern(st);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    // Make more interesting combinations
+</span></span><span style=display:flex><span>    // st = tile(st,2.0);
+</span></span><span style=display:flex><span>    // st = rotate2D(st,-PI*u_time*0.25);
+</span></span><span style=display:flex><span>    // st = rotateTilePattern(st*2.);
+</span></span><span style=display:flex><span>    // st = rotate2D(st,PI*u_time*0.25);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    // step(st.x,st.y) just makes a b<span style=color:#960050;background-color:#1e0010>&amp;</span>w triangles
+</span></span><span style=display:flex><span>    // but you can use whatever design you want.
+</span></span><span style=display:flex><span>    gl_FragColor = vec4(vec3(step(st.x,st.y)),1.0);
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><details><summary>Code brick.frag</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>// Author @patriciogv ( patriciogonzalezvivo.com ) - 2015
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>#ifdef GL_ES
+</span></span><span style=display:flex><span>precision mediump float;
+</span></span><span style=display:flex><span>#endif
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>uniform vec2 u_resolution;
+</span></span><span style=display:flex><span>uniform float u_time;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>uniform float u_zoom;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>vec2 brickTile(vec2 _st, float _zoom){
+</span></span><span style=display:flex><span>    _st *= _zoom;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    // Here is where the offset is happening
+</span></span><span style=display:flex><span>    _st.x += step(1., mod(_st.y,2.0)) * 0.5;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    return fract(_st);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>float box(vec2 _st, vec2 _size){
+</span></span><span style=display:flex><span>    _size = vec2(0.5)-_size*0.5;
+</span></span><span style=display:flex><span>    vec2 uv = smoothstep(_size,_size+vec2(1e-4),_st);
+</span></span><span style=display:flex><span>    uv *= smoothstep(_size,_size+vec2(1e-4),vec2(1.0)-_st);
+</span></span><span style=display:flex><span>    return uv.x*uv.y;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>void main(void){
+</span></span><span style=display:flex><span>    vec2 st = gl_FragCoord.xy/u_resolution.xy;
+</span></span><span style=display:flex><span>    vec3 color = vec3(0.0);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    // Modern metric brick of 215mm x 102.5mm x 65mm
+</span></span><span style=display:flex><span>    // http://www.jaharrison.me.uk/Brickwork/Sizes.html
+</span></span><span style=display:flex><span>    // st /= vec2(2.15,0.65)/1.5;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    // Apply the brick tiling
+</span></span><span style=display:flex><span>    st = brickTile(st,u_zoom);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    color = vec3(box(st,vec2(0.9)));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    // Uncomment to see the space coordinates
+</span></span><span style=display:flex><span>    //color = vec3(st,0.0);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    gl_FragColor = vec4(color,1.0);
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><p><details><summary>Code color.frag</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>// Author @patriciogv - 2015
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>#ifdef GL_ES
+</span></span><span style=display:flex><span>precision mediump float;
+</span></span><span style=display:flex><span>#endif
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>uniform vec2 u_resolution;
+</span></span><span style=display:flex><span>uniform float u_time;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>uniform float u_zoom;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>float circle(in vec2 _st, in float _radius){
+</span></span><span style=display:flex><span>    vec2 l = _st-vec2(0.5);
+</span></span><span style=display:flex><span>    return 1.-smoothstep(_radius-(_radius*0.01),
+</span></span><span style=display:flex><span>                         _radius+(_radius*0.01),
+</span></span><span style=display:flex><span>                         dot(l,l)*4.0);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>void main() {
+</span></span><span style=display:flex><span>	vec2 st = gl_FragCoord.xy/u_resolution;
+</span></span><span style=display:flex><span>    vec3 color = vec3(0.0);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    st *= u_zoom;      // Scale up the space by 3
+</span></span><span style=display:flex><span>    st = fract(st); // Wrap around 1.0
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    // Now we have 9 spaces that go from 0-1
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    color = vec3(st,0.0);
+</span></span><span style=display:flex><span>    //color = vec3(circle(st,0.5));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	gl_FragColor = vec4(color,1.0);
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><iframe id=sketch style=width:430px;height:430px srcdoc="
         <!DOCTYPE html>
         <html>
           <head>
@@ -24,12 +280,12 @@ Background # Code # Code Procedural Texturing //Code Conclusions # References # 
             
             
             
-            <script src=/vc_page/sketches/shaders/coloring/sketch.js></script>
+            <script src=/vc_page/sketches/shaders/procedural/sketch.js></script>
           </head>
           <body>
           </body>
         </html>
-      "></iframe><h2 id=conclusions>Conclusions
+      "></iframe></p><h2 id=conclusions>Conclusions
 <a class=anchor href=#conclusions>#</a></h2><h3 id=references>References
-<a class=anchor href=#references>#</a></h3></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/visualcomputing/showcase/commit/9b70c9f6b0926985d37d05c2440017248d613bc7 title='Last modified by mnguzmanc | November 25, 2022' target=_blank rel=noopener><img src=/vc_page/svg/calendar.svg class=book-icon alt=Calendar>
-<span>November 25, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#procedural-texturing>Procedural Texturing</a><ul><li><a href=#problem-statement>Problem statement</a></li><li><a href=#background>Background</a></li><li><a href=#code>Code</a></li><li><a href=#conclusions>Conclusions</a><ul><li><a href=#references>References</a></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>
+<a class=anchor href=#references>#</a></h3></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/visualcomputing/showcase/commit/f245d67fbdd1dea780fb21aca47975e893177cee title='Last modified by mnguzmanc | November 27, 2022' target=_blank rel=noopener><img src=/vc_page/svg/calendar.svg class=book-icon alt=Calendar>
+<span>November 27, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#procedural-texturing>Procedural Texturing</a><ul><li><a href=#problem-statement>Problem statement</a></li><li><a href=#background>Background</a></li><li><a href=#code>Code</a></li><li><a href=#conclusions>Conclusions</a><ul><li><a href=#references>References</a></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>
