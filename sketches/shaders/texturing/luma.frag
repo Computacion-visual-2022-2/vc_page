@@ -5,6 +5,9 @@ uniform int coloring_tool;
 uniform sampler2D texture;
 varying vec2 texcoords2;
 
+uniform bool tinting;
+uniform vec4 tintingColor;
+
 // returns component average of given texel
 float avg(vec3 texel) {
   return (texel.r + texel.g + texel.b)/3.0;
@@ -17,7 +20,7 @@ float luma(vec3 texel) {
 
 // returns hsv of given texel
 float hsv(vec3 texel) {
-  return max(max(texel.r, texel.b), max(texel.r,texel.g));
+  return max(max(texel.r, texel.g), texel.b);
 }
 
 // returns hsl of given texel
@@ -27,6 +30,10 @@ float hsl(vec3 texel){
   return (maxColor + minColor)/2.0;
 }
 
+//returns texture with tinting color
+vec4 tintingTex(vec4 texel){
+  return tintingColor * texel;
+}
 
 void main() {
   // texture2D(texture, texcoords2) samples texture at texcoords2 
@@ -44,7 +51,10 @@ void main() {
   }else if (coloring_tool == 4){
     texel = vec4((vec3(hsl(texel.rgb))), 1.0);
   }
-  gl_FragColor = texel;
   
-  //gl_FragColor = grey_scale ? vec4((vec3(luma(texel.rgb))), 1.0) : texel;
+  if (tinting){
+    texel = tintingTex(texel);
+  }
+  
+  gl_FragColor = texel;
 }

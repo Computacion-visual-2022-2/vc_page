@@ -6,8 +6,8 @@ Implement other coloring brightness tools such as HSV value V, HSL lightness L o
 Redefine the shape texture coordinates to turn the above image upside down.
 Exercises 2
 Include the blue channel in the uv visualization (e.g., use blue with red or green channels). Use other shapes different than the quad as screen filters. Exercises 3
-Implement other coloring brightness tools such as HSV value V, HSL lightness L or Component average. Implement texture tinting by mixing color and texel interpolated data."><meta property="og:type" content="article"><meta property="og:url" content="https://computacion-visual-2022-2.github.io/vc_page/docs/contenido/shaders/2._texturing/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-11-24T22:26:24-05:00"><title>2. Texturing | VC-2022-2</title><link rel=manifest href=/vc_page/manifest.json><link rel=icon href=/vc_page/favicon.png type=image/x-icon><link rel=stylesheet href=/vc_page/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/vc_page/flexsearch.min.js></script>
-<script defer src=/vc_page/en.search.min.303f13527378895781366cc951124910e48300bb42eca1733ccb9e0b23629fc5.js integrity="sha256-MD8TUnN4iVeBNmzJURJJEOSDALtC7KFzPMueCyNin8U=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+Implement other coloring brightness tools such as HSV value V, HSL lightness L or Component average. Implement texture tinting by mixing color and texel interpolated data."><meta property="og:type" content="article"><meta property="og:url" content="https://computacion-visual-2022-2.github.io/vc_page/docs/contenido/shaders/2._texturing/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-11-26T21:49:18-05:00"><title>2. Texturing | VC-2022-2</title><link rel=manifest href=/vc_page/manifest.json><link rel=icon href=/vc_page/favicon.png type=image/x-icon><link rel=stylesheet href=/vc_page/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/vc_page/flexsearch.min.js></script>
+<script defer src=/vc_page/en.search.min.236dbdb70ecc6a9334b1d81f2c0e23c80d643f71df948c4959d945101dcd9d3f.js integrity="sha256-I229tw7MapM0sdgfLA4jyA1kP3HflIxJWdlFEB3NnT8=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/vc_page/><span>VC-2022-2</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/vc_page/docs/contenido/>Contenido</a><ul><li><input type=checkbox id=section-389d651ad498d6de6d23b8270b749d93 class=toggle checked>
 <label for=section-389d651ad498d6de6d23b8270b749d93 class="flex justify-between"><a role=button>Shaders</a></label><ul><li><a href=/vc_page/docs/contenido/shaders/1._coloring/>1. Coloring</a></li><li><a href=/vc_page/docs/contenido/shaders/2._texturing/ class=active>2. Texturing</a></li><li><a href=/vc_page/docs/contenido/shaders/3._image_processing/>3. Image Processing</a></li><li><a href=/vc_page/docs/contenido/shaders/4._procedural_texturing/>4. Procedural Texturing</a></li><li><a href=/vc_page/docs/contenido/shaders/5._lighting/>5. Lighting</a></li></ul></li><li><input type=checkbox id=section-2389dc99fc67873ebfb8ef67f4a3fee8 class=toggle>
 <label for=section-2389dc99fc67873ebfb8ef67f4a3fee8 class="flex justify-between"><a role=button>Workshop1</a></label><ul><li><a href=/vc_page/docs/contenido/workshop1/illusions/>Illusions</a></li><li><a href=/vc_page/docs/contenido/workshop1/masking/>Masking</a></li></ul></li><li><input type=checkbox id=section-815c4fefd753e489e90e326d54a408e9 class=toggle>
@@ -18,7 +18,49 @@ Implement other coloring brightness tools such as HSV value V, HSL lightness L o
 <a class=anchor href=#problem-statement>#</a></h2><blockquote class="book-hint info"><p><strong>Exercise 1</strong></p><p>Redefine the shape texture coordinates to turn the above image upside down.</p></blockquote><blockquote class="book-hint info"><p><strong>Exercises 2</strong></p><ol><li>Include the blue channel in the uv visualization (e.g., use blue with red or green channels).</li><li>Use other shapes different than the quad as screen filters.</li></ol></blockquote><blockquote class="book-hint info"><p><strong>Exercises 3</strong></p><ol><li>Implement other coloring brightness tools such as HSV value V, HSL lightness L or Component average.</li><li>Implement texture tinting by mixing color and texel interpolated data.</li></ol></blockquote><h2 id=background>Background
 <a class=anchor href=#background>#</a></h2><h2 id=code>Code
 <a class=anchor href=#code>#</a></h2><h3 id=exercise-1>Exercise 1
-<a class=anchor href=#exercise-1>#</a></h3><details><summary>Code Texturing 1</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>//Code</span></span></code></pre></div></div></details><iframe id=sketch1 style=width:320px;height:350px srcdoc="
+<a class=anchor href=#exercise-1>#</a></h3><details><summary>Code Texturing 1 .js</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>let uvShader;
+</span></span><span style=display:flex><span>let brighSlider;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function preload() {
+</span></span><span style=display:flex><span>  uvShader = readShader(&#39;/vc_page/sketches/shaders/texturing/uv1.frag&#39;,
+</span></span><span style=display:flex><span>                        { matrices: Tree.NONE, varyings: Tree.texcoords2 });
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function setup() {
+</span></span><span style=display:flex><span>  createCanvas(300, 300, WEBGL);
+</span></span><span style=display:flex><span>  noStroke();
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  shader(uvShader);
+</span></span><span style=display:flex><span>  // https://p5js.org/reference/#/p5/textureMode
+</span></span><span style=display:flex><span>  // best and simplest is to just always used NORMAL
+</span></span><span style=display:flex><span>  textureMode(NORMAL);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function draw() {
+</span></span><span style=display:flex><span>  background(0);
+</span></span><span style=display:flex><span>  /*
+</span></span><span style=display:flex><span>        y                  v
+</span></span><span style=display:flex><span>        |                  |
+</span></span><span style=display:flex><span>  (-1,1)|     (1,1)        (0,1)     (1,1)
+</span></span><span style=display:flex><span>  *_____|_____*            *__________*   
+</span></span><span style=display:flex><span>  |     |     |            |          |        
+</span></span><span style=display:flex><span>  |_____|_____|__x         | texture  |        
+</span></span><span style=display:flex><span>  |     |     |            |  space   |
+</span></span><span style=display:flex><span>  *_____|_____*            *__________*___ u
+</span></span><span style=display:flex><span>  (-1,-1)    (1,-1)       (0,0)    (1,0) 
+</span></span><span style=display:flex><span>  */
+</span></span><span style=display:flex><span>  beginShape();
+</span></span><span style=display:flex><span>   vertex(-1, -1, 0, 0, 1);
+</span></span><span style=display:flex><span>  vertex( 1, -1, 0, 1, 1);
+</span></span><span style=display:flex><span>  vertex( 1,  1, 0, 1, 0);
+</span></span><span style=display:flex><span>  vertex(-1,  1, 0, 0, 0);
+</span></span><span style=display:flex><span>  endShape();
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><details><summary>Code Texturing 1 .frag</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>precision mediump float;
+</span></span><span style=display:flex><span>varying vec2 texcoords2;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>void main() {
+</span></span><span style=display:flex><span>  gl_FragColor = vec4(texcoords2.xy, 0.0, 1.0);
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><iframe id=sketch1 style=width:320px;height:350px srcdoc="
         <!DOCTYPE html>
         <html>
           <head>
@@ -35,7 +77,99 @@ Implement other coloring brightness tools such as HSV value V, HSL lightness L o
           </body>
         </html>
       "></iframe><h3 id=exercise-2>Exercise 2
-<a class=anchor href=#exercise-2>#</a></h3><details><summary>Code Texturing 2</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>//Code</span></span></code></pre></div></div></details><iframe id=sketch2 style=width:320px;height:350px srcdoc="
+<a class=anchor href=#exercise-2>#</a></h3><details><summary>Code Texturing 2 .js</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>let easycam;
+</span></span><span style=display:flex><span>let uvShader;
+</span></span><span style=display:flex><span>let opacity, colorB;
+</span></span><span style=display:flex><span>let selection_box;
+</span></span><span style=display:flex><span>let figure = &#39;Rectangle&#39;;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function preload() {
+</span></span><span style=display:flex><span>  uvShader = readShader(&#39;/vc_page/sketches/shaders/texturing/uv2.frag&#39;,
+</span></span><span style=display:flex><span>              { matrices: Tree.pmvMatrix, varyings: Tree.texcoords2 });
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function setup() {
+</span></span><span style=display:flex><span>  createCanvas(300, 300, WEBGL);
+</span></span><span style=display:flex><span>  // easycam stuff
+</span></span><span style=display:flex><span>  let state = {
+</span></span><span style=display:flex><span>    distance: 250,           // scalar
+</span></span><span style=display:flex><span>    center: [0, 0, 0],       // vector
+</span></span><span style=display:flex><span>    rotation: [0, 0, 0, 1],  // quaternion
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>  easycam = createEasyCam();
+</span></span><span style=display:flex><span>  easycam.state_reset = state;   // state to use on reset (double-click/tap)
+</span></span><span style=display:flex><span>  easycam.setState(state, 2000); // now animate to that state
+</span></span><span style=display:flex><span>  textureMode(NORMAL);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  selection_box = createSelect();
+</span></span><span style=display:flex><span>  selection_box.position(10, 10);
+</span></span><span style=display:flex><span>  selection_box.style(&#39;color&#39;, &#39;black&#39;);
+</span></span><span style=display:flex><span>  selection_box.option(&#39;Rectangle&#39;);
+</span></span><span style=display:flex><span>  selection_box.option(&#39;Triangle&#39;);
+</span></span><span style=display:flex><span>  selection_box.option(&#39;Circle&#39;);
+</span></span><span style=display:flex><span>  selection_box.changed(selectEvent);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  opacity = createSlider(0, 1, 0.5, 0.01);
+</span></span><span style=display:flex><span>  opacity.position(10, 30);
+</span></span><span style=display:flex><span>  opacity.style(&#39;width&#39;, &#39;280px&#39;);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  colorB = createSlider(0, 1, 0.5, 0.01);
+</span></span><span style=display:flex><span>  colorB.position(10, 50);
+</span></span><span style=display:flex><span>  colorB.style(&#39;width&#39;, &#39;280px&#39;);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function selectEvent(){
+</span></span><span style=display:flex><span>  figure = selection_box.value();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function draw() {
+</span></span><span style=display:flex><span>  background(200);
+</span></span><span style=display:flex><span>  // reset shader so that the default shader is used to render the 3D scene
+</span></span><span style=display:flex><span>  resetShader();
+</span></span><span style=display:flex><span>  // world space scene
+</span></span><span style=display:flex><span>  axes();
+</span></span><span style=display:flex><span>  grid();
+</span></span><span style=display:flex><span>  translate(0, -70);
+</span></span><span style=display:flex><span>  rotateY(0.5);
+</span></span><span style=display:flex><span>  fill(color(255, 0, 255, 125));
+</span></span><span style=display:flex><span>  box(30, 50);
+</span></span><span style=display:flex><span>  translate(70, 70);
+</span></span><span style=display:flex><span>  fill(color(0, 255, 255, 125));
+</span></span><span style=display:flex><span>  sphere(30, 50);
+</span></span><span style=display:flex><span>  // use custom shader
+</span></span><span style=display:flex><span>  shader(uvShader);
+</span></span><span style=display:flex><span>  // https://p5js.org/reference/#/p5.Shader/setUniform
+</span></span><span style=display:flex><span>  uvShader.setUniform(&#39;opacity&#39;, opacity.value());
+</span></span><span style=display:flex><span>  uvShader.setUniform(&#39;colorB&#39;, colorB.value());
+</span></span><span style=display:flex><span>  // screen-space quad (i.e., x ∈ [0..width] and y ∈ [0..height])
+</span></span><span style=display:flex><span>  // see: https://github.com/VisualComputing/p5.treegl#heads-up-display
+</span></span><span style=display:flex><span>  beginHUD();
+</span></span><span style=display:flex><span>  noStroke();
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  if (figure == &#39;Rectangle&#39;){
+</span></span><span style=display:flex><span>    quad(0, 0, width, 0, width, height, 0, height);
+</span></span><span style=display:flex><span>  } else if (figure == &#39;Circle&#39;){
+</span></span><span style=display:flex><span>    circle(width/2, height/2, width, height);
+</span></span><span style=display:flex><span>  } else {
+</span></span><span style=display:flex><span>    triangle(width/2, 0, 0, height, width, height);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  endHUD();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function mouseWheel(event) {
+</span></span><span style=display:flex><span>  //comment to enable page scrolling
+</span></span><span style=display:flex><span>  return false;
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><details><summary>Code Texturing 2 .frag</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>precision mediump float;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>varying vec2 texcoords2;
+</span></span><span style=display:flex><span>varying vec4 color4;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>uniform float opacity;
+</span></span><span style=display:flex><span>uniform float colorB;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>void main() {
+</span></span><span style=display:flex><span>  gl_FragColor = vec4(texcoords2.xy, colorB , opacity);
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><iframe id=sketch2 style=width:320px;height:350px srcdoc="
         <!DOCTYPE html>
         <html>
           <head>
@@ -52,7 +186,129 @@ Implement other coloring brightness tools such as HSV value V, HSL lightness L o
           </body>
         </html>
       "></iframe><h3 id=exercise-3>Exercise 3
-<a class=anchor href=#exercise-3>#</a></h3><details><summary>Code Texturing 3</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>//Code</span></span></code></pre></div></div></details><iframe id=sketch3 style=width:720px;height:550px srcdoc="
+<a class=anchor href=#exercise-3>#</a></h3><details><summary>Code Texturing 3 .js</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>let lumaShader;
+</span></span><span style=display:flex><span>let img;
+</span></span><span style=display:flex><span>let grey_scale;
+</span></span><span style=display:flex><span>let selection_box;
+</span></span><span style=display:flex><span>let coloring_tool = 0;
+</span></span><span style=display:flex><span>let color_picker;
+</span></span><span style=display:flex><span>let tinting;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function preload() {
+</span></span><span style=display:flex><span>  lumaShader = readShader(&#39;/vc_page/sketches/shaders/texturing/luma.frag&#39;,
+</span></span><span style=display:flex><span>                        { varyings: Tree.texcoords2 });
+</span></span><span style=display:flex><span>  // image source: https://t.ly/Dz8W
+</span></span><span style=display:flex><span>  img = loadImage(&#39;https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Fire_breathing_2_Luc_Viatour.jpg/800px-Fire_breathing_2_Luc_Viatour.jpg&#39;);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function setup() {
+</span></span><span style=display:flex><span>  createCanvas(700, 500, WEBGL);
+</span></span><span style=display:flex><span>  noStroke();
+</span></span><span style=display:flex><span>  textureMode(NORMAL);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  colorMode(RGB, 1);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  shader(lumaShader);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  selection_box = createSelect();
+</span></span><span style=display:flex><span>  selection_box.position(15, 20);
+</span></span><span style=display:flex><span>  selection_box.style(&#39;color&#39;, &#39;black&#39;);
+</span></span><span style=display:flex><span>  selection_box.option(&#39;Original&#39;, 0);
+</span></span><span style=display:flex><span>  selection_box.option(&#39;Component Average&#39;, 1);
+</span></span><span style=display:flex><span>  selection_box.option(&#39;Luma&#39;, 2);
+</span></span><span style=display:flex><span>  selection_box.option(&#39;HSV&#39;, 3);
+</span></span><span style=display:flex><span>  selection_box.option(&#39;HSL&#39;, 4);
+</span></span><span style=display:flex><span>  selection_box.changed(selectEvent);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  tinting = createCheckbox(&#39;Tinting&#39;, false);
+</span></span><span style=display:flex><span>  tinting.style(&#39;color&#39;, &#39;white&#39;);
+</span></span><span style=display:flex><span>  tinting.position(15, 45);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  color_picker = createColorPicker(color(1.0, 0.0, 0.0));
+</span></span><span style=display:flex><span>  color_picker.position(15, 70);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  lumaShader.setUniform(&#39;texture&#39;, img);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function selectEvent(){
+</span></span><span style=display:flex><span>  coloring_tool = selection_box.value();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function draw() {
+</span></span><span style=display:flex><span>  background(0);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  tintingColor = color_picker.color();
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  lumaShader.setUniform(&#39;coloring_tool&#39;, coloring_tool);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  if (tinting.checked()) {
+</span></span><span style=display:flex><span>    lumaShader.setUniform(&#39;tinting&#39;, true);
+</span></span><span style=display:flex><span>    lumaShader.setUniform(&#39;tintingColor&#39;, [red(tintingColor), green(tintingColor), blue(tintingColor), 1.0]);
+</span></span><span style=display:flex><span>  } else {
+</span></span><span style=display:flex><span>    lumaShader.setUniform(&#39;tinting&#39;, false);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  quad(-width / 2, -height / 2, width / 2, -height / 2,
+</span></span><span style=display:flex><span>        width / 2, height / 2, -width / 2, height / 2);
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><p><details><summary>Code Texturing 3 .frag</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>precision mediump float;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>uniform int coloring_tool;
+</span></span><span style=display:flex><span>uniform sampler2D texture;
+</span></span><span style=display:flex><span>varying vec2 texcoords2;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>uniform bool tinting;
+</span></span><span style=display:flex><span>uniform vec4 tintingColor;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>// returns component average of given texel
+</span></span><span style=display:flex><span>float avg(vec3 texel) {
+</span></span><span style=display:flex><span>  return (texel.r + texel.g + texel.b)/3.0;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>// returns luma of given texel
+</span></span><span style=display:flex><span>float luma(vec3 texel) {
+</span></span><span style=display:flex><span>  return 0.299 * texel.r + 0.587 * texel.g + 0.114 * texel.b;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>// returns hsv of given texel
+</span></span><span style=display:flex><span>float hsv(vec3 texel) {
+</span></span><span style=display:flex><span>  return max(max(texel.r, texel.g), texel.b);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>// returns hsl of given texel
+</span></span><span style=display:flex><span>float hsl(vec3 texel){
+</span></span><span style=display:flex><span>  float maxColor = max(max(texel.r, texel.g), texel.b);
+</span></span><span style=display:flex><span>  float minColor = min(min(texel.r, texel.g), texel.b);
+</span></span><span style=display:flex><span>  return (maxColor + minColor)/2.0;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>//returns texture with tinting color
+</span></span><span style=display:flex><span>vec4 tintingTex(vec4 texel){
+</span></span><span style=display:flex><span>  return tintingColor * texel;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>void main() {
+</span></span><span style=display:flex><span>  // texture2D(texture, texcoords2) samples texture at texcoords2 
+</span></span><span style=display:flex><span>  // and returns the normalized texel color
+</span></span><span style=display:flex><span>  vec4 texel = texture2D(texture, texcoords2);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  if (coloring_tool == 0){
+</span></span><span style=display:flex><span>    texel = texel;
+</span></span><span style=display:flex><span>  }else if (coloring_tool == 1){
+</span></span><span style=display:flex><span>    texel = vec4((vec3(avg(texel.rgb))), 1.0);
+</span></span><span style=display:flex><span>  }else if (coloring_tool == 2){
+</span></span><span style=display:flex><span>    texel = vec4((vec3(luma(texel.rgb))), 1.0);
+</span></span><span style=display:flex><span>  }else if (coloring_tool == 3){
+</span></span><span style=display:flex><span>    texel = vec4((vec3(hsv(texel.rgb))), 1.0);
+</span></span><span style=display:flex><span>  }else if (coloring_tool == 4){
+</span></span><span style=display:flex><span>    texel = vec4((vec3(hsl(texel.rgb))), 1.0);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  if (tinting){
+</span></span><span style=display:flex><span>    texel = tintingTex(texel);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  gl_FragColor = texel;
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><iframe id=sketch3 style=width:720px;height:550px srcdoc="
         <!DOCTYPE html>
         <html>
           <head>
@@ -68,7 +324,7 @@ Implement other coloring brightness tools such as HSV value V, HSL lightness L o
           <body>
           </body>
         </html>
-      "></iframe><h2 id=conclusions>Conclusions
+      "></iframe></p><h2 id=conclusions>Conclusions
 <a class=anchor href=#conclusions>#</a></h2><h3 id=references>References
-<a class=anchor href=#references>#</a></h3></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/visualcomputing/showcase/commit/9b70c9f6b0926985d37d05c2440017248d613bc7 title='Last modified by mnguzmanc | November 25, 2022' target=_blank rel=noopener><img src=/vc_page/svg/calendar.svg class=book-icon alt=Calendar>
-<span>November 25, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#texturing>Texturing</a><ul><li><a href=#problem-statement>Problem statement</a></li><li><a href=#background>Background</a></li><li><a href=#code>Code</a><ul><li><a href=#exercise-1>Exercise 1</a></li><li><a href=#exercise-2>Exercise 2</a></li><li><a href=#exercise-3>Exercise 3</a></li></ul></li><li><a href=#conclusions>Conclusions</a><ul><li><a href=#references>References</a></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>
+<a class=anchor href=#references>#</a></h3></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/visualcomputing/showcase/commit/f2e34e1c3405e3f3a16bc80b9aeb8ef3496cff12 title='Last modified by mnguzmanc | November 27, 2022' target=_blank rel=noopener><img src=/vc_page/svg/calendar.svg class=book-icon alt=Calendar>
+<span>November 27, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#texturing>Texturing</a><ul><li><a href=#problem-statement>Problem statement</a></li><li><a href=#background>Background</a></li><li><a href=#code>Code</a><ul><li><a href=#exercise-1>Exercise 1</a></li><li><a href=#exercise-2>Exercise 2</a></li><li><a href=#exercise-3>Exercise 3</a></li></ul></li><li><a href=#conclusions>Conclusions</a><ul><li><a href=#references>References</a></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>

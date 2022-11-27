@@ -1,9 +1,9 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content=" Image Processing # Problem statement # Exercise
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Image Processing # Problem statement # Exercise
 Implement an image / video processing app supporting different masks, including other kernel sizes different than 3x3, and:
-A region-of-interest base tool to selectively apply a given mask. A magnifier tool. Integrate luma and other coloring brightness tools. Background # Code # Code Coloring //Code Conclusions # References # "><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content><meta property="og:description" content=" Image Processing # Problem statement # Exercise
+A region-of-interest base tool to selectively apply a given mask. A magnifier tool. Integrate luma and other coloring brightness tools. Background # Code # Code Image Processing .js let theShader; let img; let input; let select_mask, select_brightness, select_type; let mask_value = 0; let region, magnifier; let coloring_tool = 'None'; let coloring_tool_value = 0; let vid; let cam; function preload() { theShader = readShader('/vc_page/sketches/shaders/image/shader."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content><meta property="og:description" content="Image Processing # Problem statement # Exercise
 Implement an image / video processing app supporting different masks, including other kernel sizes different than 3x3, and:
-A region-of-interest base tool to selectively apply a given mask. A magnifier tool. Integrate luma and other coloring brightness tools. Background # Code # Code Coloring //Code Conclusions # References # "><meta property="og:type" content="article"><meta property="og:url" content="https://computacion-visual-2022-2.github.io/vc_page/docs/contenido/shaders/3._image_processing/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-11-24T22:26:24-05:00"><title>3. Image Processing | VC-2022-2</title><link rel=manifest href=/vc_page/manifest.json><link rel=icon href=/vc_page/favicon.png type=image/x-icon><link rel=stylesheet href=/vc_page/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/vc_page/flexsearch.min.js></script>
-<script defer src=/vc_page/en.search.min.303f13527378895781366cc951124910e48300bb42eca1733ccb9e0b23629fc5.js integrity="sha256-MD8TUnN4iVeBNmzJURJJEOSDALtC7KFzPMueCyNin8U=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+A region-of-interest base tool to selectively apply a given mask. A magnifier tool. Integrate luma and other coloring brightness tools. Background # Code # Code Image Processing .js let theShader; let img; let input; let select_mask, select_brightness, select_type; let mask_value = 0; let region, magnifier; let coloring_tool = 'None'; let coloring_tool_value = 0; let vid; let cam; function preload() { theShader = readShader('/vc_page/sketches/shaders/image/shader."><meta property="og:type" content="article"><meta property="og:url" content="https://computacion-visual-2022-2.github.io/vc_page/docs/contenido/shaders/3._image_processing/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-11-26T21:49:18-05:00"><title>3. Image Processing | VC-2022-2</title><link rel=manifest href=/vc_page/manifest.json><link rel=icon href=/vc_page/favicon.png type=image/x-icon><link rel=stylesheet href=/vc_page/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/vc_page/flexsearch.min.js></script>
+<script defer src=/vc_page/en.search.min.236dbdb70ecc6a9334b1d81f2c0e23c80d643f71df948c4959d945101dcd9d3f.js integrity="sha256-I229tw7MapM0sdgfLA4jyA1kP3HflIxJWdlFEB3NnT8=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/vc_page/><span>VC-2022-2</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/vc_page/docs/contenido/>Contenido</a><ul><li><input type=checkbox id=section-389d651ad498d6de6d23b8270b749d93 class=toggle checked>
 <label for=section-389d651ad498d6de6d23b8270b749d93 class="flex justify-between"><a role=button>Shaders</a></label><ul><li><a href=/vc_page/docs/contenido/shaders/1._coloring/>1. Coloring</a></li><li><a href=/vc_page/docs/contenido/shaders/2._texturing/>2. Texturing</a></li><li><a href=/vc_page/docs/contenido/shaders/3._image_processing/ class=active>3. Image Processing</a></li><li><a href=/vc_page/docs/contenido/shaders/4._procedural_texturing/>4. Procedural Texturing</a></li><li><a href=/vc_page/docs/contenido/shaders/5._lighting/>5. Lighting</a></li></ul></li><li><input type=checkbox id=section-2389dc99fc67873ebfb8ef67f4a3fee8 class=toggle>
 <label for=section-2389dc99fc67873ebfb8ef67f4a3fee8 class="flex justify-between"><a role=button>Workshop1</a></label><ul><li><a href=/vc_page/docs/contenido/workshop1/illusions/>Illusions</a></li><li><a href=/vc_page/docs/contenido/workshop1/masking/>Masking</a></li></ul></li><li><input type=checkbox id=section-815c4fefd753e489e90e326d54a408e9 class=toggle>
@@ -13,7 +13,280 @@ A region-of-interest base tool to selectively apply a given mask. A magnifier to
 <a class=anchor href=#image-processing>#</a></h1><h2 id=problem-statement>Problem statement
 <a class=anchor href=#problem-statement>#</a></h2><blockquote class="book-hint info"><p><strong>Exercise</strong></p><p>Implement an image / video processing app supporting different masks, including other kernel sizes different than 3x3, and:</p><ul><li>A region-of-interest base tool to selectively apply a given mask.</li><li>A magnifier tool.</li><li>Integrate luma and other coloring brightness tools.</li></ul></blockquote><h2 id=background>Background
 <a class=anchor href=#background>#</a></h2><h2 id=code>Code
-<a class=anchor href=#code>#</a></h2><details><summary>Code Coloring</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>//Code</span></span></code></pre></div></div></details><iframe id=sketch style=width:720px;height:550px srcdoc="
+<a class=anchor href=#code>#</a></h2><details><summary>Code Image Processing .js</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>let theShader;
+</span></span><span style=display:flex><span>let img;
+</span></span><span style=display:flex><span>let input;
+</span></span><span style=display:flex><span>let select_mask, select_brightness, select_type;
+</span></span><span style=display:flex><span>let mask_value = 0;
+</span></span><span style=display:flex><span>let region, magnifier;
+</span></span><span style=display:flex><span>let coloring_tool = &#39;None&#39;;
+</span></span><span style=display:flex><span>let coloring_tool_value = 0;
+</span></span><span style=display:flex><span>let vid;
+</span></span><span style=display:flex><span>let cam;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function preload() {
+</span></span><span style=display:flex><span>  theShader = readShader(&#39;/vc_page/sketches/shaders/image/shader.frag&#39;,
+</span></span><span style=display:flex><span>                        { varyings: Tree.texcoords2 });
+</span></span><span style=display:flex><span>  img = loadImage(&#39;/vc_page/sketches/shaders/image/hojas.jpg&#39;);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  vid = createVideo([&#39;/vc_page/sketches/shaders/image/dog.mp4&#39;]);
+</span></span><span style=display:flex><span>  vid.hide();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function setup() {
+</span></span><span style=display:flex><span>  createCanvas(700, 500, WEBGL);
+</span></span><span style=display:flex><span>  noStroke();
+</span></span><span style=display:flex><span>  textureMode(NORMAL);
+</span></span><span style=display:flex><span>  shader(theShader);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  select_mask = createSelect();
+</span></span><span style=display:flex><span>  select_mask.position(20, 15);
+</span></span><span style=display:flex><span>  select_mask.style(&#39;color&#39;, &#39;black&#39;);
+</span></span><span style=display:flex><span>  select_mask.option(&#39;Identity&#39;, 0);
+</span></span><span style=display:flex><span>  select_mask.option(&#39;Sharpen&#39;, 1);
+</span></span><span style=display:flex><span>  select_mask.option(&#39;Box Blur&#39;, 2);
+</span></span><span style=display:flex><span>  select_mask.option(&#39;Edge Detection&#39;, 3);
+</span></span><span style=display:flex><span>  select_mask.option(&#39;Gaussian&#39;, 4);
+</span></span><span style=display:flex><span>  select_mask.option(&#39;Emboss&#39;, 5);  
+</span></span><span style=display:flex><span>  select_mask.changed(selectEventMask);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  theShader.setUniform(&#39;mask&#39;, [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  region = createCheckbox(&#39;Region&#39;, false);
+</span></span><span style=display:flex><span>  region.style(&#39;color&#39;, &#39;white&#39;);
+</span></span><span style=display:flex><span>  region.position(150, 15);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  magnifier = createCheckbox(&#39;Magnifier&#39;, false);
+</span></span><span style=display:flex><span>  magnifier.style(&#39;color&#39;, &#39;white&#39;);
+</span></span><span style=display:flex><span>  magnifier.position(230, 15);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  select_brightness = createSelect();
+</span></span><span style=display:flex><span>  select_brightness.position(330, 15);
+</span></span><span style=display:flex><span>  select_brightness.style(&#39;color&#39;, &#39;black&#39;);
+</span></span><span style=display:flex><span>  select_brightness.option(&#39;Original&#39;, 0);
+</span></span><span style=display:flex><span>  select_brightness.option(&#39;Component Average&#39;, 1);
+</span></span><span style=display:flex><span>  select_brightness.option(&#39;Luma&#39;, 2);
+</span></span><span style=display:flex><span>  select_brightness.option(&#39;HSV&#39;, 3);
+</span></span><span style=display:flex><span>  select_brightness.option(&#39;HSL&#39;, 4);
+</span></span><span style=display:flex><span>  select_brightness.changed(selectEventBrightness);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  cam = createCapture(VIDEO);
+</span></span><span style=display:flex><span>  cam.hide();
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  select_type = createSelect();
+</span></span><span style=display:flex><span>  select_type.position(500, 15);
+</span></span><span style=display:flex><span>  select_type.style(&#39;color&#39;, &#39;black&#39;);
+</span></span><span style=display:flex><span>  select_type.option(&#39;Imagen&#39;, 0);
+</span></span><span style=display:flex><span>  select_type.option(&#39;Video&#39;, 1);
+</span></span><span style=display:flex><span>  select_type.option(&#39;Camera&#39;, 2);
+</span></span><span style=display:flex><span>  select_type.changed(selectEventType);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  theShader.setUniform(&#39;texture&#39;, img);
+</span></span><span style=display:flex><span>  emitResolution(theShader, &#39;u_resolution&#39;);    
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function selectEventMask(){
+</span></span><span style=display:flex><span>  mask_value = select_mask.value();
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  switch (mask_value){
+</span></span><span style=display:flex><span>      case &#39;0&#39;:
+</span></span><span style=display:flex><span>        theShader.setUniform(&#39;mask&#39;, [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]); 
+</span></span><span style=display:flex><span>        break;
+</span></span><span style=display:flex><span>      case &#39;1&#39;:
+</span></span><span style=display:flex><span>        theShader.setUniform(&#39;mask&#39;, [-1.0, 0.0, -1.0, 0.0, 5.0, 0.0, -1.0, 0.0, -1.0]);
+</span></span><span style=display:flex><span>        break;
+</span></span><span style=display:flex><span>      case &#39;2&#39;:
+</span></span><span style=display:flex><span>        theShader.setUniform(&#39;mask&#39;, [0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111]);
+</span></span><span style=display:flex><span>        break;
+</span></span><span style=display:flex><span>      case &#39;3&#39;:
+</span></span><span style=display:flex><span>        theShader.setUniform(&#39;mask&#39;, [-1.0, -1.0, -1.0, -1.0, 8.0, -1.0, -1.0, -1.0, -1.0]);
+</span></span><span style=display:flex><span>        break;
+</span></span><span style=display:flex><span>      case &#39;4&#39;:
+</span></span><span style=display:flex><span>        theShader.setUniform(&#39;mask&#39;, [0.0625, 0.125, 0.0625, 0.125, 0.25, 0.125, 0.0625, 0.125, 0.0625]); 
+</span></span><span style=display:flex><span>        break;
+</span></span><span style=display:flex><span>      case &#39;5&#39;:
+</span></span><span style=display:flex><span>        theShader.setUniform(&#39;mask&#39;, [-2.0, -1.0, 0.0, -1.0, 1.0, 0.0, 0.0, 1.0, 0.0]); 
+</span></span><span style=display:flex><span>        break;
+</span></span><span style=display:flex><span>      default:
+</span></span><span style=display:flex><span>        console.log(mask_value);
+</span></span><span style=display:flex><span>        break;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function selectEventBrightness(){
+</span></span><span style=display:flex><span>  coloring_tool_value = select_brightness.value();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function selectEventType(){
+</span></span><span style=display:flex><span>  type_value = select_type.value();
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  switch (type_value){
+</span></span><span style=display:flex><span>    case &#39;0&#39;:
+</span></span><span style=display:flex><span>      theShader.setUniform(&#39;texture&#39;, img);
+</span></span><span style=display:flex><span>      vid.pause();
+</span></span><span style=display:flex><span>      break;
+</span></span><span style=display:flex><span>    case &#39;1&#39;:
+</span></span><span style=display:flex><span>      theShader.setUniform(&#39;texture&#39;, vid);
+</span></span><span style=display:flex><span>      vid.loop();
+</span></span><span style=display:flex><span>      break;
+</span></span><span style=display:flex><span>    case &#39;2&#39;:
+</span></span><span style=display:flex><span>      theShader.setUniform(&#39;texture&#39;, cam);
+</span></span><span style=display:flex><span>      vid.pause();
+</span></span><span style=display:flex><span>      break; 
+</span></span><span style=display:flex><span>    default:
+</span></span><span style=display:flex><span>      console.log(type_value);
+</span></span><span style=display:flex><span>      break;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function draw() {
+</span></span><span style=display:flex><span>  background(0);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  if (region.checked()) {
+</span></span><span style=display:flex><span>    emitMousePosition(theShader, &#39;u_mouse&#39;);
+</span></span><span style=display:flex><span>    theShader.setUniform(&#39;region&#39;, true);
+</span></span><span style=display:flex><span>  } else if (magnifier.checked()) {
+</span></span><span style=display:flex><span>    emitMousePosition(theShader, &#39;u_mouse&#39;);
+</span></span><span style=display:flex><span>    theShader.setUniform(&#39;magnifier&#39;, true);
+</span></span><span style=display:flex><span>  }else{
+</span></span><span style=display:flex><span>    theShader.setUniform(&#39;region&#39;, false);
+</span></span><span style=display:flex><span>    theShader.setUniform(&#39;magnifier&#39;, false);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  theShader.setUniform(&#39;coloring_tool&#39;, coloring_tool_value);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  emitTexOffset(theShader, img, &#39;texOffset&#39;);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  quad(-width / 2 + 20, -height / 2 + 35, width / 2 - 20, -height / 2 + 35,
+</span></span><span style=display:flex><span>        width / 2 - 20, height / 2 - 30, -width / 2 + 20, height / 2 - 30);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>// Ref: https://p5js.org/es/examples/3d-shader-using-webcam.html</span></span></code></pre></div></div></details><p><details><summary>Code Image Processing .frag</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span>precision mediump float;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>// uniforms are defined and sent by the sketch
+</span></span><span style=display:flex><span>uniform int coloring_tool;
+</span></span><span style=display:flex><span>uniform sampler2D texture;
+</span></span><span style=display:flex><span>varying vec2 texcoords2;
+</span></span><span style=display:flex><span>uniform vec2 texOffset;
+</span></span><span style=display:flex><span>// holds the 3x3 kernel
+</span></span><span style=display:flex><span>uniform float mask[9];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>uniform bool region;
+</span></span><span style=display:flex><span>uniform bool magnifier;
+</span></span><span style=display:flex><span>uniform vec2 u_mouse;
+</span></span><span style=display:flex><span>uniform vec2 u_resolution;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>// returns component average of given texel
+</span></span><span style=display:flex><span>float avg(vec3 texel) {
+</span></span><span style=display:flex><span>  return (texel.r + texel.g + texel.b)/3.0;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>// returns luma of given texel
+</span></span><span style=display:flex><span>float luma(vec3 texel) {
+</span></span><span style=display:flex><span>  return 0.299 * texel.r + 0.587 * texel.g + 0.114 * texel.b;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>// returns hsv of given texel
+</span></span><span style=display:flex><span>float hsv(vec3 texel) {
+</span></span><span style=display:flex><span>  return max(max(texel.r, texel.b), max(texel.r,texel.g));
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>// returns hsl of given texel
+</span></span><span style=display:flex><span>float hsl(vec3 texel){
+</span></span><span style=display:flex><span>  float maxColor = max(max(texel.r, texel.g), texel.b);
+</span></span><span style=display:flex><span>  float minColor = min(min(texel.r, texel.g), texel.b);
+</span></span><span style=display:flex><span>  return (maxColor + minColor)/2.0;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>// returns 
+</span></span><span style=display:flex><span>vec4 coloringBrightness(vec4 texel){
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  if (coloring_tool == 0){
+</span></span><span style=display:flex><span>    texel = texel;
+</span></span><span style=display:flex><span>  }else if (coloring_tool == 1){
+</span></span><span style=display:flex><span>    texel = vec4((vec3(avg(texel.rgb))), 1.0);
+</span></span><span style=display:flex><span>  }else if (coloring_tool == 2){
+</span></span><span style=display:flex><span>    texel = vec4((vec3(luma(texel.rgb))), 1.0);
+</span></span><span style=display:flex><span>  }else if (coloring_tool == 3){
+</span></span><span style=display:flex><span>    texel = vec4((vec3(hsv(texel.rgb))), 1.0);
+</span></span><span style=display:flex><span>  }else if (coloring_tool == 4){
+</span></span><span style=display:flex><span>    texel = vec4((vec3(hsl(texel.rgb))), 1.0);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  return texel;
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>vec4 convolutionMask(){
+</span></span><span style=display:flex><span>  // 1. Use offset to move along texture space.
+</span></span><span style=display:flex><span>  // In this case to find the texcoords of the texel neighbours.
+</span></span><span style=display:flex><span>  vec2 tc0 = texcoords2 + vec2(-texOffset.s, -texOffset.t);
+</span></span><span style=display:flex><span>  vec2 tc1 = texcoords2 + vec2(         0.0, -texOffset.t);
+</span></span><span style=display:flex><span>  vec2 tc2 = texcoords2 + vec2(+texOffset.s, -texOffset.t);
+</span></span><span style=display:flex><span>  vec2 tc3 = texcoords2 + vec2(-texOffset.s,          0.0);
+</span></span><span style=display:flex><span>  // origin (current fragment texcoords)
+</span></span><span style=display:flex><span>  vec2 tc4 = texcoords2 + vec2(         0.0,          0.0);
+</span></span><span style=display:flex><span>  vec2 tc5 = texcoords2 + vec2(+texOffset.s,          0.0);
+</span></span><span style=display:flex><span>  vec2 tc6 = texcoords2 + vec2(-texOffset.s, +texOffset.t);
+</span></span><span style=display:flex><span>  vec2 tc7 = texcoords2 + vec2(         0.0, +texOffset.t);
+</span></span><span style=display:flex><span>  vec2 tc8 = texcoords2 + vec2(+texOffset.s, +texOffset.t);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  // 2. Sample texel neighbours within the rgba array
+</span></span><span style=display:flex><span>  vec4 rgba[9];
+</span></span><span style=display:flex><span>  rgba[0] = texture2D(texture, tc0);
+</span></span><span style=display:flex><span>  rgba[1] = texture2D(texture, tc1);
+</span></span><span style=display:flex><span>  rgba[2] = texture2D(texture, tc2);
+</span></span><span style=display:flex><span>  rgba[3] = texture2D(texture, tc3);
+</span></span><span style=display:flex><span>  rgba[4] = texture2D(texture, tc4);
+</span></span><span style=display:flex><span>  rgba[5] = texture2D(texture, tc5);
+</span></span><span style=display:flex><span>  rgba[6] = texture2D(texture, tc6);
+</span></span><span style=display:flex><span>  rgba[7] = texture2D(texture, tc7);
+</span></span><span style=display:flex><span>  rgba[8] = texture2D(texture, tc8);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  // 3. Apply convolution kernel
+</span></span><span style=display:flex><span>  vec4 convolution;
+</span></span><span style=display:flex><span>  for (int i = 0; i &lt; <span style=color:#f92672>9</span><span style=color:#960050;background-color:#1e0010>;</span> <span style=color:#a6e22e>i</span><span style=color:#960050;background-color:#1e0010>++)</span> <span style=color:#960050;background-color:#1e0010>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>convolution</span> <span style=color:#960050;background-color:#1e0010>+=</span> <span style=color:#a6e22e>rgba</span><span style=color:#960050;background-color:#1e0010>[</span><span style=color:#a6e22e>i</span><span style=color:#960050;background-color:#1e0010>]*</span><span style=color:#a6e22e>mask</span><span style=color:#960050;background-color:#1e0010>[</span><span style=color:#a6e22e>i</span><span style=color:#960050;background-color:#1e0010>];</span>
+</span></span><span style=display:flex><span>  <span style=color:#960050;background-color:#1e0010>}</span>
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>return</span> <span style=color:#a6e22e>vec4</span><span style=color:#960050;background-color:#1e0010>(</span><span style=color:#a6e22e>convolution</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>rgb</span><span style=color:#960050;background-color:#1e0010>,</span> <span style=color:#a6e22e>1</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>0</span><span style=color:#960050;background-color:#1e0010>);</span> 
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>void</span> <span style=color:#a6e22e>main</span><span style=color:#960050;background-color:#1e0010>()</span> <span style=color:#960050;background-color:#1e0010>{</span>
+</span></span><span style=display:flex><span>  <span style=color:#960050;background-color:#1e0010>//</span> <span style=color:#a6e22e>texture2D</span><span style=color:#960050;background-color:#1e0010>(</span><span style=color:#a6e22e>texture</span><span style=color:#960050;background-color:#1e0010>,</span> <span style=color:#a6e22e>texcoords2</span><span style=color:#960050;background-color:#1e0010>)</span> <span style=color:#a6e22e>samples</span> <span style=color:#a6e22e>texture</span> <span style=color:#a6e22e>at</span> <span style=color:#a6e22e>texcoords2</span> 
+</span></span><span style=display:flex><span>  <span style=color:#960050;background-color:#1e0010>//</span> <span style=color:#a6e22e>and</span> <span style=color:#a6e22e>returns</span> <span style=color:#a6e22e>the</span> <span style=color:#a6e22e>normalized</span> <span style=color:#a6e22e>texel</span> <span style=color:#a6e22e>color</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>vec4</span> <span style=color:#a6e22e>texel </span><span style=color:#f92672>=</span> <span style=color:#e6db74>texture2D(texture,</span> <span style=color:#a6e22e>texcoords2</span><span style=color:#960050;background-color:#1e0010>);</span>
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#960050;background-color:#1e0010>//</span><span style=color:#a6e22e>Shadertoy</span> <span style=color:#a6e22e>Code</span> <span style=color:#a6e22e>Magnifier</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>float</span> <span style=color:#a6e22e>R </span><span style=color:#f92672>=</span> <span style=color:#e6db74>100.0;</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>float</span> <span style=color:#a6e22e>h </span><span style=color:#f92672>=</span> <span style=color:#e6db74>40.0;</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>float</span> <span style=color:#a6e22e>hr </span><span style=color:#f92672>=</span> <span style=color:#e6db74>R</span> <span style=color:#960050;background-color:#1e0010>*</span> <span style=color:#a6e22e>sqrt</span><span style=color:#960050;background-color:#1e0010>(</span><span style=color:#a6e22e>1</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>0</span> <span style=color:#a6e22e>-</span> <span style=color:#960050;background-color:#1e0010>((</span><span style=color:#a6e22e>R</span> <span style=color:#a6e22e>-</span> <span style=color:#a6e22e>h</span><span style=color:#960050;background-color:#1e0010>)</span> <span style=color:#960050;background-color:#1e0010>/</span> <span style=color:#a6e22e>R</span><span style=color:#960050;background-color:#1e0010>)</span> <span style=color:#960050;background-color:#1e0010>*</span> <span style=color:#960050;background-color:#1e0010>((</span><span style=color:#a6e22e>R</span> <span style=color:#a6e22e>-</span> <span style=color:#a6e22e>h</span><span style=color:#960050;background-color:#1e0010>)</span> <span style=color:#960050;background-color:#1e0010>/</span> <span style=color:#a6e22e>R</span><span style=color:#960050;background-color:#1e0010>));</span>
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>vec2</span> <span style=color:#a6e22e>xy </span><span style=color:#f92672>=</span> <span style=color:#e6db74>gl_FragCoord.xy</span> <span style=color:#a6e22e>-</span> <span style=color:#a6e22e>u_mouse</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>xy</span><span style=color:#960050;background-color:#1e0010>;</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>float</span> <span style=color:#a6e22e>r </span><span style=color:#f92672>=</span> <span style=color:#e6db74>sqrt(xy.x</span> <span style=color:#960050;background-color:#1e0010>*</span> <span style=color:#a6e22e>xy</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>x</span> <span style=color:#960050;background-color:#1e0010>+</span> <span style=color:#a6e22e>xy</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>y</span> <span style=color:#960050;background-color:#1e0010>*</span> <span style=color:#a6e22e>xy</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>y</span><span style=color:#960050;background-color:#1e0010>);</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>vec2</span> <span style=color:#a6e22e>new_xy </span><span style=color:#f92672>=</span> <span style=color:#e6db74>r</span> <span style=color:#960050;background-color:#1e0010>&lt;</span> <span style=color:#a6e22e>hr</span> <span style=color:#960050;background-color:#1e0010>?</span> <span style=color:#a6e22e>xy</span> <span style=color:#960050;background-color:#1e0010>*</span> <span style=color:#960050;background-color:#1e0010>(</span><span style=color:#a6e22e>R</span> <span style=color:#a6e22e>-</span> <span style=color:#a6e22e>h</span><span style=color:#960050;background-color:#1e0010>)</span> <span style=color:#960050;background-color:#1e0010>/</span> <span style=color:#a6e22e>sqrt</span><span style=color:#960050;background-color:#1e0010>(</span><span style=color:#a6e22e>R</span> <span style=color:#960050;background-color:#1e0010>*</span> <span style=color:#a6e22e>R</span> <span style=color:#a6e22e>-</span> <span style=color:#a6e22e>r</span> <span style=color:#960050;background-color:#1e0010>*</span> <span style=color:#a6e22e>r</span><span style=color:#960050;background-color:#1e0010>)</span> <span style=color:#a6e22e>:</span> <span style=color:#a6e22e>xy</span><span style=color:#960050;background-color:#1e0010>;</span>
+</span></span><span style=display:flex><span>  <span style=color:#960050;background-color:#1e0010>//</span>
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>texel </span><span style=color:#f92672>=</span> <span style=color:#e6db74>convolutionMask();</span>
+</span></span><span style=display:flex><span>  <span style=color:#960050;background-color:#1e0010>//</span><span style=color:#a6e22e>texel </span><span style=color:#f92672>=</span> <span style=color:#e6db74>coloringBrightness(texel);</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>if</span> <span style=color:#960050;background-color:#1e0010>(</span><span style=color:#a6e22e>region</span><span style=color:#960050;background-color:#1e0010>){</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>if</span><span style=color:#960050;background-color:#1e0010>(</span><span style=color:#a6e22e>r</span> <span style=color:#960050;background-color:#1e0010>&lt;</span> <span style=color:#a6e22e>hr</span><span style=color:#960050;background-color:#1e0010>){</span>
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>gl_FragColor </span><span style=color:#f92672>=</span> <span style=color:#e6db74>convolutionMask();</span>
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>gl_FragColor </span><span style=color:#f92672>=</span> <span style=color:#e6db74>coloringBrightness(texel);</span>
+</span></span><span style=display:flex><span>    <span style=color:#960050;background-color:#1e0010>}</span><span style=color:#a6e22e>else</span><span style=color:#960050;background-color:#1e0010>{</span>
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>gl_FragColor </span><span style=color:#f92672>=</span> <span style=color:#e6db74>texture2D(texture,</span> <span style=color:#a6e22e>texcoords2</span><span style=color:#960050;background-color:#1e0010>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#960050;background-color:#1e0010>}</span>
+</span></span><span style=display:flex><span>  <span style=color:#960050;background-color:#1e0010>}</span> <span style=color:#a6e22e>else</span> <span style=color:#a6e22e>if</span> <span style=color:#960050;background-color:#1e0010>(</span><span style=color:#a6e22e>magnifier</span><span style=color:#960050;background-color:#1e0010>){</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>gl_FragColor </span><span style=color:#f92672>=</span> <span style=color:#e6db74>texture2D(texture,</span> <span style=color:#960050;background-color:#1e0010>(</span><span style=color:#a6e22e>new_xy</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>xy</span> <span style=color:#960050;background-color:#1e0010>+</span> <span style=color:#a6e22e>u_mouse</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>xy</span><span style=color:#960050;background-color:#1e0010>)</span> <span style=color:#960050;background-color:#1e0010>/</span> <span style=color:#960050;background-color:#1e0010>(</span><span style=color:#a6e22e>u_resolution</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>xy</span><span style=color:#960050;background-color:#1e0010>));</span>
+</span></span><span style=display:flex><span>  <span style=color:#960050;background-color:#1e0010>}</span> <span style=color:#a6e22e>else</span> <span style=color:#960050;background-color:#1e0010>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>gl_FragColor </span><span style=color:#f92672>=</span> <span style=color:#e6db74>convolutionMask();</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>gl_FragColor </span><span style=color:#f92672>=</span> <span style=color:#e6db74>coloringBrightness(texel);</span>
+</span></span><span style=display:flex><span>  <span style=color:#960050;background-color:#1e0010>}</span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>//</span> <span style=color:#a6e22e>Ref:</span> <span style=color:#a6e22e>https:</span><span style=color:#960050;background-color:#1e0010>//</span><span style=color:#a6e22e>www</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>shadertoy</span><span style=color:#960050;background-color:#1e0010>.</span><span style=color:#a6e22e>com</span><span style=color:#960050;background-color:#1e0010>/</span><span style=color:#a6e22e>view</span><span style=color:#960050;background-color:#1e0010>/</span><span style=color:#a6e22e>Ms33WX</span></span></span></code></pre></div></div></details><iframe id=sketch style=width:720px;height:550px srcdoc="
         <!DOCTYPE html>
         <html>
           <head>
@@ -29,7 +302,7 @@ A region-of-interest base tool to selectively apply a given mask. A magnifier to
           <body>
           </body>
         </html>
-      "></iframe><h2 id=conclusions>Conclusions
+      "></iframe></p><h2 id=conclusions>Conclusions
 <a class=anchor href=#conclusions>#</a></h2><h3 id=references>References
-<a class=anchor href=#references>#</a></h3></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/visualcomputing/showcase/commit/9b70c9f6b0926985d37d05c2440017248d613bc7 title='Last modified by mnguzmanc | November 25, 2022' target=_blank rel=noopener><img src=/vc_page/svg/calendar.svg class=book-icon alt=Calendar>
-<span>November 25, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#image-processing>Image Processing</a><ul><li><a href=#problem-statement>Problem statement</a></li><li><a href=#background>Background</a></li><li><a href=#code>Code</a></li><li><a href=#conclusions>Conclusions</a><ul><li><a href=#references>References</a></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>
+<a class=anchor href=#references>#</a></h3><ul><li><a href=https://p5js.org/es/examples/3d-shader-using-webcam.html>https://p5js.org/es/examples/3d-shader-using-webcam.html</a></li><li><a href=https://www.shadertoy.com/view/Ms33WX>https://www.shadertoy.com/view/Ms33WX</a></li><li><a href=https://pixabay.com/es/photos/sale-de-planta-hojas-de-loto-318743/>https://pixabay.com/es/photos/sale-de-planta-hojas-de-loto-318743/</a></li></ul></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/visualcomputing/showcase/commit/f2e34e1c3405e3f3a16bc80b9aeb8ef3496cff12 title='Last modified by mnguzmanc | November 27, 2022' target=_blank rel=noopener><img src=/vc_page/svg/calendar.svg class=book-icon alt=Calendar>
+<span>November 27, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#image-processing>Image Processing</a><ul><li><a href=#problem-statement>Problem statement</a></li><li><a href=#background>Background</a></li><li><a href=#code>Code</a></li><li><a href=#conclusions>Conclusions</a><ul><li><a href=#references>References</a></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>
