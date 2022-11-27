@@ -25,7 +25,7 @@ function setup() {
   shader(theShader);
   
   select_mask = createSelect();
-  select_mask.position(10, 10);
+  select_mask.position(20, 15);
   select_mask.style('color', 'black');
   select_mask.option('Identity', 0);
   select_mask.option('Sharpen', 1);
@@ -39,14 +39,14 @@ function setup() {
   
   region = createCheckbox('Region', false);
   region.style('color', 'white');
-  region.position(140, 10);
+  region.position(150, 15);
   
   magnifier = createCheckbox('Magnifier', false);
   magnifier.style('color', 'white');
-  magnifier.position(220, 10);
+  magnifier.position(230, 15);
 
   select_brightness = createSelect();
-  select_brightness.position(320, 10);
+  select_brightness.position(330, 15);
   select_brightness.style('color', 'black');
   select_brightness.option('Original', 0);
   select_brightness.option('Component Average', 1);
@@ -59,7 +59,7 @@ function setup() {
   cam.hide();
   
   select_type = createSelect();
-  select_type.position(490, 10);
+  select_type.position(500, 15);
   select_type.style('color', 'black');
   select_type.option('Imagen', 0);
   select_type.option('Video', 1);
@@ -145,6 +145,5 @@ function draw() {
   quad(-width / 2 + 20, -height / 2 + 35, width / 2 - 20, -height / 2 + 35,
         width / 2 - 20, height / 2 - 30, -width / 2 + 20, height / 2 - 30);
 }
-
 
 // Ref: https://p5js.org/es/examples/3d-shader-using-webcam.html
