@@ -14,7 +14,6 @@ function preload() {
 function setup() {
   createCanvas(400, 400, WEBGL);
   colorMode(RGB, 1);
-  //setAttributes('ambient', true);
   
   // easycam stuff
   let state = {
